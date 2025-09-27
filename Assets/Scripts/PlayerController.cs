@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] 
     private float m_moveSpeed = 8;
-    
-    private Vector3 m_currentMoveDirection = Vector3.zero;
+
+    private Vector2 m_currentMoveInput;
     private Vector3 m_currentVelocity = Vector3.zero;
     public Vector3 CurrentVelocity => m_currentVelocity;
 
@@ -51,8 +51,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        m_currentVelocity.x = m_currentMoveDirection.x * m_moveSpeed;
-        m_currentVelocity.z = m_currentMoveDirection.z * m_moveSpeed;
+        Vector3 moveDirection = new Vector3(m_currentMoveInput.x, 0, m_currentMoveInput.y);
+        moveDirection = transform.TransformDirection(moveDirection);
+        
+        m_currentVelocity.x = moveDirection.x * m_moveSpeed;
+        m_currentVelocity.z = moveDirection.z * m_moveSpeed;
         
         if(m_characterController.isGrounded && m_currentVelocity.y < 0)
             m_currentVelocity.y = -1.0f; // Small value to ensure we stay grounded
@@ -78,9 +81,7 @@ public class PlayerController : MonoBehaviour
     
     public void OnMoveInput(Vector2 input)
     {
-        Vector3 moveDirection = new Vector3(input.x, 0, input.y);
-        
-        m_currentMoveDirection = transform.TransformDirection(moveDirection);
+        m_currentMoveInput = input;
     }
     
     public void OnToggleFlashlightInput()
