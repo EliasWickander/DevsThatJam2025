@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7396699416959103240}
   - component: {fileID: 5487446684706867515}
+  - component: {fileID: 3823944040617063376}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -111,6 +112,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightManager
   m_persistentBetweenScenes: 0
+--- !u!114 &3823944040617063376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5252834800872201324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e7147fe57ff7e54098e1e05323ca96b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  m_persistentBetweenScenes: 0
 --- !u!1001 &4994914465214434856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +133,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7396699416959103240}
     m_Modifications:
+    - target: {fileID: 2771415602062399598, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5706298
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771415602062399598, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771415602062399598, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.10375
+      objectReference: {fileID: 0}
     - target: {fileID: 4430764790221743447, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.64144
@@ -162,6 +188,18 @@ PrefabInstance:
     - target: {fileID: 5368503848482891038, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
       propertyPath: m_Name
       value: CameraManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642893683105153185, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5706298
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642893683105153185, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642893683105153185, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.10375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
