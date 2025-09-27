@@ -14,6 +14,10 @@ public enum ESmallMothState
 public class SmallMoth : MonoBehaviour
 {
     [SerializeField]
+    private Transform m_headTransform;
+    public Transform HeadTransform => m_headTransform;
+    
+    [SerializeField]
     private float m_turnRate = 5.0f;
     public float TurnRate => m_turnRate;
     
@@ -82,17 +86,5 @@ public class SmallMoth : MonoBehaviour
         }
         
         m_currentLightTarget = targetLight;
-    }
-    
-    public void RotateTowards(Vector3 targetPoint)
-    {
-        Vector3 dirToTargetXZ = targetPoint - transform.position;
-        dirToTargetXZ.y = 0;
-        
-        if (dirToTargetXZ.sqrMagnitude > 0.01f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(dirToTargetXZ);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, m_turnRate * Time.deltaTime);
-        }
     }
 }

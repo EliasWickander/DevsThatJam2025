@@ -5,6 +5,8 @@ using UnityEngine.AI;
 public class State_MoveTowardsLight : State
 {
     private SmallMoth m_mothOwner;
+
+    private bool m_hasReachedTarget = false;
     public State_MoveTowardsLight(SmallMoth owner) : base(owner.gameObject)
     {
         m_mothOwner = owner;
@@ -21,6 +23,9 @@ public class State_MoveTowardsLight : State
 
         if (targetLight != null)
         {
+            Vector3 headRotationTarget = targetLight.transform.position;
+            Vector3 bodyRotationTarget = targetLight.transform.position;
+            
             Vector3 dirToLightXZ = targetLight.transform.position - m_mothOwner.transform.position;
             dirToLightXZ.y = 0; 
             float sqrDistanceToLight = dirToLightXZ.sqrMagnitude;
@@ -31,10 +36,15 @@ public class State_MoveTowardsLight : State
             }
             else
             {
+                if (targetLight.transform.CompareTag("Flashlight"))
+                    headRotationTarget = GameContext.Player.HeadTransform.position;
+
                 m_mothOwner.NavmeshAgent.ResetPath();
+                m_hasReachedTarget = true;
             }
             
-            m_mothOwner.RotateTowards(targetLight.transform.position);
+            RotateBodyTowards(bodyRotationTarget);
+            RotateHeadTowards(headRotationTarget);
         }
         else
         {
@@ -50,6 +60,7 @@ public class State_MoveTowardsLight : State
     private void MoveToLight(Light light)
     {
         Vector3 targetPosition = CalculateTargetPosition(light);
+        m_hasReachedTarget = false;
 
         if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 2f, NavMesh.AllAreas))
         {
@@ -66,5 +77,28 @@ public class State_MoveTowardsLight : State
     private Vector3 CalculateTargetPosition(Light light)
     {
         return light.transform.position;
+    }
+    
+    private void RotateBodyTowards(Vector3 targetPosition)
+    {
+        Vector3 toTarget = targetPosition - m_mothOwner.transform.position;
+        Vector3 toTargetXZ = new Vector3(toTarget.x, 0f, toTarget.z);
+
+        if (toTargetXZ.sqrMagnitude < 0.0001f)
+            return;
+
+        Quaternion targetRot = Quaternion.LookRotation(toTargetXZ.normalized, Vector3.up);
+        m_mothOwner.transform.rotation = Quaternion.Slerp(m_mothOwner.transform.rotation, targetRot, m_mothOwner.TurnRate * Time.deltaTime);
+    }
+
+    private void RotateHeadTowards(Vector3 targetPosition)
+    {
+        Vector3 toTarget = targetPosition - m_mothOwner.HeadTransform.position;
+
+        if (toTarget.sqrMagnitude < 0.0001f)
+            return;
+
+        Quaternion targetRot = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
+        m_mothOwner.HeadTransform.rotation = Quaternion.Slerp(m_mothOwner.HeadTransform.rotation, targetRot, m_mothOwner.TurnRate * Time.deltaTime);
     }
 }
