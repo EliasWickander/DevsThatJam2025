@@ -39,7 +39,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Flashlight toggled");
+            m_playerController.OnToggleFlashlightInput();
         }
     }
 }

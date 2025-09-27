@@ -27,10 +27,10 @@
                 {
                     "name": "Toggle Flashlight",
                     "type": "Button",
-                    "id": "c74c2aca-9c0d-492b-b5b0-9ddf229f8645",
+                    "id": "0966e819-697b-4fed-8bb2-9d2d0268f954",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -191,22 +191,11 @@
                 },
                 {
                     "name": "",
-                    "id": "1bea5d03-dba2-4bbd-a903-4428263bdba9",
+                    "id": "e2ddb5cc-1d7a-4794-942e-dc1cc4c00167",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Toggle Flashlight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "426ee037-c501-4ed9-b9c7-ae2cd904f29a",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "",
                     "action": "Toggle Flashlight",
                     "isComposite": false,
                     "isPartOfComposite": false

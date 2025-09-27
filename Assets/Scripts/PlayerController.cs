@@ -1,10 +1,20 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] 
     private CharacterController m_characterController;
+    
+    [SerializeField]
+    private Transform m_handTransform;
+    
+    [SerializeField]
+    private Vector3 m_handPositionOffset = new Vector3(0.3f, -0.3f, 0.5f);
+    
+    [SerializeField]
+    private Flashlight m_flashLight;
     
     [SerializeField] 
     private float m_moveSpeed = 8;
@@ -20,8 +30,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandleTurning();
         HandleMovement();
+    }
+
+    private void LateUpdate()
+    {
+        HandleTurning();
     }
 
     private void HandleMovement()
@@ -37,10 +51,18 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTurning()
     {
-        Vector3 cameraEulerAngles = CameraManager.Instance.CurrentCamera.transform.eulerAngles;
+        Transform cameraTransform = CameraManager.Instance.CurrentCamera.transform;
+        Vector3 cameraEulerAngles = cameraTransform.eulerAngles;
+        float cameraPitch = cameraEulerAngles.x;
         float cameraYaw = cameraEulerAngles.y;
 
         transform.rotation = Quaternion.Euler(0f, cameraYaw, 0f);
+        
+        Quaternion targetHandRotation = Quaternion.Euler(cameraPitch, cameraYaw, 0f);
+        m_handTransform.rotation = Quaternion.Slerp(m_handTransform.rotation, targetHandRotation, Time.deltaTime * 15f);
+
+        Vector3 targetHandPosition = cameraTransform.position + cameraTransform.TransformVector(m_handPositionOffset);
+        m_handTransform.position = Vector3.Lerp(m_handTransform.position, targetHandPosition, Time.deltaTime * 15f);
     }
     
     public void OnMoveInput(Vector2 input)
@@ -48,5 +70,10 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
         
         m_currentMoveDirection = transform.TransformDirection(moveDirection);
+    }
+    
+    public void OnToggleFlashlightInput()
+    {
+        m_flashLight.ToggleFlashlight();
     }
 }
