@@ -61,7 +61,7 @@ public class State_Chase : State
 
     public override void OnExit(State nextState)
     {
-        m_navAgent.isStopped = false;
+        m_navAgent.ResetPath();
         m_losePlayerTimer = 0f;
         m_destinationUpdateTimer = 0f;
     }

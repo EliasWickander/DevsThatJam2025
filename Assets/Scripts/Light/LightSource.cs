@@ -11,6 +11,7 @@ public abstract class LightSource : MonoBehaviour
     
     private void Start()
     {
+        LightManager.Instance.AddLightSource(this);
         Toggle(m_lightObject.gameObject.activeSelf);
     }
 
@@ -28,6 +29,12 @@ public abstract class LightSource : MonoBehaviour
         
         OnToggle(m_isOn);
         OnToggled?.Invoke(m_lightObject, m_isOn);
+    }
+    
+    private void Kill()
+    {
+        Toggle(false);
+        LightManager.Instance.RemoveLightSource(this);
     }
 
     protected virtual void OnToggle(bool isOn)

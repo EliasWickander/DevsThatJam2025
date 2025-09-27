@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26f1cf262e8e0f4f9bec44ce393ba62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallMoth
-  m_headTransform: {fileID: 0}
+  m_headTransform: {fileID: 5537409539317039436}
   m_turnRate: 5
   m_lightDetectionRadius: 10
   m_lightFollowDistanceThreshold: 1

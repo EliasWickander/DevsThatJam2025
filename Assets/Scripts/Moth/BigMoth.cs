@@ -37,6 +37,7 @@ public class BigMoth : MonoBehaviour
     private float m_updateDestinationInterval = 0.5f;
     public float UpdateDestinationInterval => m_updateDestinationInterval;
     
+    [SerializeField]
     private float m_attackRange = 2.0f;
     public float AttackRange => m_attackRange;
 
