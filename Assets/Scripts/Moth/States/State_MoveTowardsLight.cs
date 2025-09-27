@@ -21,7 +21,20 @@ public class State_MoveTowardsLight : State
 
         if (targetLight != null)
         {
-            MoveToLight(targetLight);
+            Vector3 dirToLightXZ = targetLight.transform.position - m_mothOwner.transform.position;
+            dirToLightXZ.y = 0; 
+            float sqrDistanceToLight = dirToLightXZ.sqrMagnitude;
+            
+            if (sqrDistanceToLight > m_mothOwner.LightFollowDistanceThreshold * m_mothOwner.LightFollowDistanceThreshold)
+            {
+                MoveToLight(targetLight);
+            }
+            else
+            {
+                m_mothOwner.NavmeshAgent.ResetPath();
+            }
+            
+            m_mothOwner.RotateTowards(targetLight.transform.position);
         }
         else
         {
@@ -37,9 +50,8 @@ public class State_MoveTowardsLight : State
     private void MoveToLight(Light light)
     {
         Vector3 targetPosition = CalculateTargetPosition(light);
-        
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(targetPosition, out hit, 2f, NavMesh.AllAreas))
+
+        if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 2f, NavMesh.AllAreas))
         {
             m_mothOwner.NavmeshAgent.SetDestination(hit.position);
         }

@@ -20,6 +20,10 @@ public class BigMoth : MonoBehaviour
     [SerializeField]
     private Transform m_headTransform;
     
+    [SerializeField]
+    private float m_turnRate = 5.0f;
+    public float TurnRate => m_turnRate;
+    
     [Header("Chase")]
     [SerializeField]
     private float m_chaseSpeed = 5.0f;
@@ -74,6 +78,8 @@ public class BigMoth : MonoBehaviour
     
     private void Awake()
     {
+        m_navmeshAgent.updateRotation = false;
+        
         Dictionary<Enum, State> states = new Dictionary<Enum, State>()
         {
             {EBigMothState.State_Patrol, new State_Patrol(this)},
@@ -115,5 +121,17 @@ public class BigMoth : MonoBehaviour
         }
 
         return false;
+    }
+    
+    public void RotateTowards(Vector3 targetPoint)
+    {
+        Vector3 dirToTargetXZ = targetPoint - transform.position;
+        dirToTargetXZ.y = 0;
+        
+        if (dirToTargetXZ.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(dirToTargetXZ);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, m_turnRate * Time.deltaTime);
+        }
     }
 }

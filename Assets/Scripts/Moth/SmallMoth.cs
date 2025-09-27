@@ -14,8 +14,16 @@ public enum ESmallMothState
 public class SmallMoth : MonoBehaviour
 {
     [SerializeField]
+    private float m_turnRate = 5.0f;
+    public float TurnRate => m_turnRate;
+    
+    [SerializeField]
     private float m_lightDetectionRadius = 10f;
     public float LightDetectionRadius => m_lightDetectionRadius;
+    
+    [SerializeField]
+    private float m_lightFollowDistanceThreshold = 1.0f;
+    public float LightFollowDistanceThreshold => m_lightFollowDistanceThreshold;
     
     [SerializeField]
     private NavMeshAgent m_navmeshAgent;
@@ -29,6 +37,8 @@ public class SmallMoth : MonoBehaviour
     
     private void Awake()
     {
+        m_navmeshAgent.updateRotation = false;
+        
         Dictionary<Enum, State> states = new Dictionary<Enum, State>()
         {
             {ESmallMothState.State_Idle, new State_Idle(this)},
@@ -56,11 +66,13 @@ public class SmallMoth : MonoBehaviour
             if (!activeLight.enabled || activeLight.intensity <= 0f)
                 continue;
 
-            float distance = Vector3.Distance(transform.position, activeLight.transform.position);
-            // if (distance > m_lightDetectionRadius)
-            //     continue;
-
-            float score = activeLight.intensity / (distance + 1f);
+            Vector3 dirToLightXZ = activeLight.transform.position - transform.position;
+            dirToLightXZ.y = 0;
+            if (dirToLightXZ.sqrMagnitude > m_lightDetectionRadius * m_lightDetectionRadius)
+                continue;
+            
+            float distanceToLight = dirToLightXZ.magnitude;
+            float score = activeLight.intensity / (distanceToLight + 1f);
 
             if (score > bestScore)
             {
@@ -70,5 +82,17 @@ public class SmallMoth : MonoBehaviour
         }
         
         m_currentLightTarget = targetLight;
+    }
+    
+    public void RotateTowards(Vector3 targetPoint)
+    {
+        Vector3 dirToTargetXZ = targetPoint - transform.position;
+        dirToTargetXZ.y = 0;
+        
+        if (dirToTargetXZ.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(dirToTargetXZ);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, m_turnRate * Time.deltaTime);
+        }
     }
 }

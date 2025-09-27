@@ -61,6 +61,8 @@ public class State_Patrol : State
                 UpdatePatrolPoint();
             }
         }
+        
+        m_mothOwner.RotateTowards(m_targetWaypoint);
     }
 
     public override void OnExit(State nextState)
