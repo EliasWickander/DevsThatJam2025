@@ -41,4 +41,21 @@ public class LightManager : Singleton<LightManager>
                 m_activeLights.Remove(lightSource);
         }
     }
+    
+    public float GetLightIntensityAtPosition(Vector3 position)
+    {
+        float totalIntensity = 0; 
+        
+        foreach (Light activeLight in m_activeLights)
+        {
+            float distance = Vector3.Distance(position, activeLight.transform.position);
+            if (distance < activeLight.range)
+            {
+                float intensity = activeLight.intensity / (1.0f + distance * distance);
+                totalIntensity += intensity;
+            }
+        }
+
+        return totalIntensity;
+    }
 }

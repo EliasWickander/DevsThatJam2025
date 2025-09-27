@@ -87,4 +87,10 @@ public class PlayerController : MonoBehaviour
     {
         m_flashLight.Toggle();
     }
+
+    public bool IsInDarkness()
+    {
+        float lightIntensity = LightManager.Instance.GetLightIntensityAtPosition(CenterPosition);
+        return lightIntensity < 0.1f;
+    }
 }

@@ -62,6 +62,10 @@ public class BigMoth : MonoBehaviour
     private float m_visionAngle = 90f;
     public float VisionAngle => m_visionAngle;
     
+    [SerializeField]
+    private float m_darknessVisionReduction = 0.2f;
+    public float DarknessVisionReduction => m_darknessVisionReduction;
+    
     private StateMachine m_stateMachine;
     public StateMachine StateMachine => m_stateMachine;
 
@@ -93,15 +97,18 @@ public class BigMoth : MonoBehaviour
         Vector3 directionToPlayer = GameContext.Player.CenterPosition - m_headTransform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
         
-        if (distanceToPlayer > m_visionRange)
+        float effectiveVisionRange = m_visionRange;
+        if (GameContext.Player.IsInDarkness())
+            effectiveVisionRange *= m_darknessVisionReduction;
+        
+        if (distanceToPlayer > effectiveVisionRange)
             return false;
 
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         if (angle > m_visionAngle * 0.5f)
             return false;
-
-        RaycastHit hit;
-        if (Physics.Raycast(m_headTransform.position, directionToPlayer.normalized, out hit, m_visionRange))
+        
+        if (Physics.Raycast(m_headTransform.position, directionToPlayer.normalized, out RaycastHit hit, effectiveVisionRange))
         {
             if (hit.transform.CompareTag("Player"))
                 return true;
