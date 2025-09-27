@@ -74,6 +74,6 @@ public class PlayerController : MonoBehaviour
     
     public void OnToggleFlashlightInput()
     {
-        m_flashLight.ToggleFlashlight();
+        m_flashLight.Toggle();
     }
 }

@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0051421f2123c2241810c97fbbe08820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flashlight
-  m_lightGameObject: {fileID: 2996158131362897356}
+  m_lightObject: {fileID: 4185849278439378004}
 --- !u!1 &2996158131362897356
 GameObject:
   m_ObjectHideFlags: 0

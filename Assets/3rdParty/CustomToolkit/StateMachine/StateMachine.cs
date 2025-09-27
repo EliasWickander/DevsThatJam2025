@@ -1,28 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace CustomToolkit.StateMachine
 {
-    public abstract class StateMachine
+    public class StateMachine
     {
-        private IState m_currentState = null;
-        public IState CurrentState => m_currentState;
+        public Dictionary<Enum, State> m_states;
 
+        private State m_currentState;
+
+        public StateMachine(Dictionary<Enum, State> states)
+        {
+            this.m_states = states;
+        
+            SetState(states.Keys.First());
+        }
+        
         public void Update()
         {
             if(m_currentState != null)
                 m_currentState.Update();
         }
     
-        public void SetState(IState newState)
+        public void SetState(Enum state)
         {
-            IState oldState = m_currentState;
+            if (!m_states.ContainsKey(state))
+                throw new Exception("Tried to set to an invalid state");
+
+            State oldState = m_currentState;
+            State newState = m_states[state];
         
-            if (oldState != null)
-            {
+            if(oldState != null)
                 oldState.OnExit(newState);
-            }
+        
+            newState.OnEnter(oldState);
 
             m_currentState = newState;
-
-            m_currentState.OnEnter(oldState);
         }
     }   
 }
