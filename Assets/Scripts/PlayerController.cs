@@ -6,12 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] 
     private CharacterController m_characterController;
+
+    [SerializeField]
+    private Transform m_headTransform;
+    public Transform HeadTransform => m_headTransform;
     
     [SerializeField]
     private Transform m_handTransform;
     
     [SerializeField]
     private Vector3 m_handPositionOffset = new Vector3(0.3f, -0.3f, 0.5f);
+    
+    public Vector3 CenterPosition => m_characterController.bounds.center;
     
     [SerializeField]
     private Flashlight m_flashLight;
@@ -26,6 +32,11 @@ public class PlayerController : MonoBehaviour
     private void OnValidate()
     {
         m_characterController = GetComponent<CharacterController>();
+    }
+
+    private void Start()
+    {
+        GameContext.Player = this;
     }
 
     private void Update()

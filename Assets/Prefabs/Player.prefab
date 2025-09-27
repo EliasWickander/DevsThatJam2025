@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 5872920197437714240}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   m_characterController: {fileID: 6263316684517309979}
+  m_headTransform: {fileID: 3792654706253814119}
   m_handTransform: {fileID: 3345129541764244796}
   m_handPositionOffset: {x: 0.3, y: -0.3, z: 0.5}
   m_flashLight: {fileID: 7676683681362605069}
