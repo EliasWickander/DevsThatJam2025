@@ -19,37 +19,37 @@ public class State_MoveTowardsLight : State
 
     public override void Update()
     {
-        Light targetLight = m_mothOwner.CurrentLightTarget;
+        Light targetLightToMoveTo = m_mothOwner.CanSeeFlashlight ? m_mothOwner.LightFromFlashlight : m_mothOwner.CurrentFascinationLightTarget;
+        Light targetLightToLookAt = m_mothOwner.CanSeeFlashlight ? m_mothOwner.LightFromFlashlight : m_mothOwner.CurrentFascinationLightTarget;
 
-        if (targetLight != null)
+        Vector3 headRotationTarget = targetLightToLookAt.transform.position;
+        Vector3 bodyRotationTarget = targetLightToLookAt.transform.position;
+        
+        if (targetLightToLookAt == null && targetLightToMoveTo == null)
         {
-            Vector3 headRotationTarget = targetLight.transform.position;
-            Vector3 bodyRotationTarget = targetLight.transform.position;
+            m_mothOwner.StateMachine.SetState(ESmallMothState.State_Idle);
+            return;
+        }
             
-            Vector3 dirToLightXZ = targetLight.transform.position - m_mothOwner.transform.position;
-            dirToLightXZ.y = 0; 
-            float sqrDistanceToLight = dirToLightXZ.sqrMagnitude;
+        Vector3 dirToLightXZ = targetLightToMoveTo.transform.position - m_mothOwner.transform.position;
+        dirToLightXZ.y = 0; 
+        float sqrDistanceToLight = dirToLightXZ.sqrMagnitude;
             
-            if (sqrDistanceToLight > m_mothOwner.LightFollowDistanceThreshold * m_mothOwner.LightFollowDistanceThreshold)
-            {
-                MoveToLight(targetLight);
-            }
-            else
-            {
-                if (targetLight.transform.CompareTag("Flashlight"))
-                    headRotationTarget = GameContext.Player.HeadTransform.position;
-
-                m_mothOwner.NavmeshAgent.ResetPath();
-                m_hasReachedTarget = true;
-            }
-            
-            RotateBodyTowards(bodyRotationTarget);
-            RotateHeadTowards(headRotationTarget);
+        if (sqrDistanceToLight > m_mothOwner.LightFollowDistanceThreshold * m_mothOwner.LightFollowDistanceThreshold)
+        {
+            MoveToLight(targetLightToMoveTo);
         }
         else
         {
-            m_mothOwner.StateMachine.SetState(ESmallMothState.State_Idle);
+            if (m_mothOwner.CanSeeFlashlight)
+                headRotationTarget = GameContext.Player.HeadTransform.position;
+
+            m_mothOwner.NavmeshAgent.ResetPath();
+            m_hasReachedTarget = true;
         }
+            
+        RotateBodyTowards(bodyRotationTarget);
+        RotateHeadTowards(headRotationTarget);
     }
 
     public override void OnExit(State nextState)

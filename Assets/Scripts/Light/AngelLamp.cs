@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class AngelLamp : LightSource
 {
-    [SerializeField]
-    private LampSwitch m_switch;
-
     private CollisionTrigger[] m_triggers;
 
     [SerializeField]
@@ -17,8 +14,6 @@ public class AngelLamp : LightSource
 
     private void OnEnable()
     {
-        m_switch.OnSwitchStateChanged += OnSwitchToggle;
-
         if (m_triggers != null)
         {
             foreach(var trigger in m_triggers)
@@ -30,8 +25,6 @@ public class AngelLamp : LightSource
 
     private void OnDisable()
     {
-        m_switch.OnSwitchStateChanged -= OnSwitchToggle;
-
         if (m_triggers!= null)
         {
             foreach(var trigger in m_triggers)
@@ -51,10 +44,5 @@ public class AngelLamp : LightSource
                 moth.OnEnterAngelLight(this);
             }
         }
-    }
-    
-    private void OnSwitchToggle(bool isOn)
-    {
-        Toggle(isOn);
     }
 }
