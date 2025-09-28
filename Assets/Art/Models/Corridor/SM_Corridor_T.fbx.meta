@@ -3,7 +3,42 @@ guid: 79c89008aaeefb84484536d7583bbb53
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Ceiling
+    second: {fileID: 2100000, guid: b8150eba7cb4a3047a821314e43f28a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Ceiling_beams
+    second: {fileID: 2100000, guid: 257d5037646085144ab4e75077625548, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Floor
+    second: {fileID: 2100000, guid: f82dc4617492cee478afd2a727e399c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Listing
+    second: {fileID: 2100000, guid: 074f088ec5bd2864a962c3151703abba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Lower_Wall
+    second: {fileID: 2100000, guid: 9997356b0aa4bee48be51acb8deaae2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Support_Beams
+    second: {fileID: 2100000, guid: 0e8b534f7536db44cb8fb948ed37a77f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_Wallpaper
+    second: {fileID: 2100000, guid: 8e6029e6cc2763b42b794cd5e1d7e27d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
