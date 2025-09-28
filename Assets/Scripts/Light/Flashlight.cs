@@ -9,9 +9,9 @@ public class Flashlight : LightSource
     {
         base.OnToggle(isOn);
 
-        if (isOn)
-            SoundFXManager.instance.PlaySoundFXClip(m_turnOnLamp, transform, 1f);
-        else
-            SoundFXManager.instance.PlaySoundFXClip(m_turnOffLamp, transform, 1f);
+        // if (isOn)
+        //     SoundFXManager.instance.PlaySoundFXClip(m_turnOnLamp, transform, 1f);
+        // else
+        //     SoundFXManager.instance.PlaySoundFXClip(m_turnOffLamp, transform, 1f);
     }
 }
