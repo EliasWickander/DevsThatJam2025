@@ -16,6 +16,10 @@ public enum ESmallMothState
 public class SmallMoth : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource m_audioSource;
+    public AudioSource AudioSource => m_audioSource;
+    
+    [SerializeField]
     private Animator m_animator;
     public Animator Animator => m_animator;
     

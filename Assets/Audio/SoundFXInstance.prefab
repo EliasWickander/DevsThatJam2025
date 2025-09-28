@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3646145113195619857}
   - component: {fileID: 1772767627269007240}
   m_Layer: 0
-  m_Name: SoundFXObject
+  m_Name: SoundFXInstance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

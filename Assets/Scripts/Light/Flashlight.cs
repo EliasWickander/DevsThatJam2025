@@ -15,7 +15,6 @@ public class Flashlight : LightSource
     {
         base.OnToggle(isOn);
         
-        m_audioSource.clip = isOn ? m_turnOnLamp : m_turnOffLamp;
-        m_audioSource.Play();
+        SoundManager.Instance.PlaySoundFX(isOn ? m_turnOnLamp : m_turnOffLamp, transform, 1.0f);
     }
 }

@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 3823944040617063376}
   - component: {fileID: 5487446684706867515}
   - component: {fileID: 5968248644482493839}
+  - component: {fileID: 6254122940084971338}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -113,6 +114,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   m_persistentBetweenScenes: 0
+  m_levelScene: Assets/Scenes/Level.unity
+  m_patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5487446684706867515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,9 +150,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
   m_playerPrefab: {fileID: 5872920197437714240, guid: 9f8e28bcff940fa40a11035314a0d38f, type: 3}
+  m_bigMothPrefab: {fileID: 7311008706960655112, guid: 0c805be261cfb60499c0e019599fd8f2, type: 3}
+  m_smallMothPrefab: {fileID: 1356074590128963809, guid: 87bbce6ccd7978b4d8559e43bf519fad, type: 3}
   m_playerCameraPrefab: {fileID: 1889699341230208692, guid: c2dcd9e58f03be947814f4b34648e93a, type: 3}
-  m_playerSpawnPoints:
+  m_smallMothAmount: 3
+  m_spawnPoints:
   - {fileID: 0}
+  m_peacefulMode: 1
+--- !u!114 &6254122940084971338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5252834800872201324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a9b2565261e764aa77c69328e9138e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  m_persistentBetweenScenes: 0
+  soundFXObject: {fileID: 1772767627269007240, guid: 431e10d7a169909459af1c7b48b2d5ad, type: 3}
 --- !u!1001 &4994914465214434856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225,8 +254,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8245040242415049134, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1891019770217534055}
   m_SourcePrefab: {fileID: 100100000, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+--- !u!1 &3980553525643057030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8245040242415049134, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
+  m_PrefabInstance: {fileID: 4994914465214434856}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &1891019770217534055
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980553525643057030}
+  m_Enabled: 1
 --- !u!4 &8659504146160331647 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4430764790221743447, guid: 8387614fd77973c45b84500fd482aadd, type: 3}

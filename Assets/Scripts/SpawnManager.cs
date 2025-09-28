@@ -27,6 +27,9 @@ public class SpawnManager : MonoBehaviour
     private Transform[] m_spawnPoints;
     
     private List<Transform> m_activeSpawnPoints = new List<Transform>();
+
+    [SerializeField]
+    private bool m_peacefulMode = false;
     
     private void Awake()
     {
@@ -36,7 +39,10 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         SpawnPlayer();
-        SpawnBigMoth();
+        
+        if(!m_peacefulMode)
+            SpawnBigMoth();
+        
         SpawnSmallMoths();
     }
 

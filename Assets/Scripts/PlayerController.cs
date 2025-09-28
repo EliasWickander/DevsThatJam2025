@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController m_characterController;
     
     [Header("Audio")]
-    [SerializeField]
-    private AudioSource m_audioSource;
     [SerializeField] 
     private AudioClip[] m_footstepClips; 
     
@@ -151,8 +149,6 @@ public class PlayerController : MonoBehaviour
             return;
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
-        
-        m_audioSource.clip = clip;
-        m_audioSource.Play();
+        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem; //AUDIO - new input system for audio
 
 public class LampSwitch : MonoBehaviour, IInteractable
 {
