@@ -16,6 +16,10 @@ public enum ESmallMothState
 public class SmallMoth : MonoBehaviour
 {
     [SerializeField]
+    private Animator m_animator;
+    public Animator Animator => m_animator;
+    
+    [SerializeField]
     private Transform m_headTransform;
     public Transform HeadTransform => m_headTransform;
     
@@ -51,6 +55,8 @@ public class SmallMoth : MonoBehaviour
     private Rigidbody m_rigidbody;
     public Rigidbody Rigidbody => m_rigidbody;
     
+    private int m_velocityHash = Animator.StringToHash("Velocity");
+    
     private void Awake()
     {
         m_navmeshAgent.updateRotation = false;
@@ -85,7 +91,12 @@ public class SmallMoth : MonoBehaviour
         
         m_stateMachine.Update();
     }
-    
+
+    private void LateUpdate()
+    {
+        m_animator.SetFloat(m_velocityHash, m_navmeshAgent.velocity.magnitude);
+    }
+
     private void UpdateLightTarget()
     {
         Light targetLight = null;
