@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AngelLamp
   m_lightObject: {fileID: 2516557330268833668}
+  m_startAsOn: 1
   m_switch: {fileID: 0}
   m_smallMothLayerMask:
     serializedVersion: 2

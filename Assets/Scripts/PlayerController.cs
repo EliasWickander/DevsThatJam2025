@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Flashlight m_flashLight;
     
+    public Flashlight FlashLight => m_flashLight;
+    
     [SerializeField] 
     private float m_moveSpeed = 8;
 

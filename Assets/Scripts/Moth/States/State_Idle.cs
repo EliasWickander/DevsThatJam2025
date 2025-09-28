@@ -16,7 +16,7 @@ public class State_Idle : State
 
     public override void Update()
     {
-        if(m_mothOwner.CurrentLightTarget != null)
+        if(m_mothOwner.CurrentFascinationLightTarget != null)
             m_mothOwner.StateMachine.SetState(ESmallMothState.State_MoveTowardsLight);
     }
 

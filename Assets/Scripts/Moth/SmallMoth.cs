@@ -54,8 +54,8 @@ public class SmallMoth : MonoBehaviour
     private StateMachine m_stateMachine;
     public StateMachine StateMachine => m_stateMachine;
 
-    private Light m_currentLightTarget;
-    public Light CurrentLightTarget => m_currentLightTarget;
+    private Light m_currentFascinationLightTarget;
+    public Light CurrentFascinationLightTarget => m_currentFascinationLightTarget;
     
     private AngelLamp m_targetAngelLamp;
     public AngelLamp TargetAngelLamp => m_targetAngelLamp;
@@ -66,6 +66,12 @@ public class SmallMoth : MonoBehaviour
     private int m_velocityHash = Animator.StringToHash("Velocity");
 
     private MothAnimationEventListener m_animationEventListener;
+    
+    private bool m_canSeeFlashlight = false;
+    public bool CanSeeFlashlight => m_canSeeFlashlight;
+    
+    private Light m_lightFromFlashlight;
+    public Light LightFromFlashlight => m_lightFromFlashlight;
     
     private void Awake()
     {
@@ -130,6 +136,7 @@ public class SmallMoth : MonoBehaviour
         Light targetLight = null;
         float bestScore = 0f;
         
+        bool canSeeFlashlight = false;
         foreach (Light activeLight in LightManager.Instance.ActiveLights)
         {
             if (!activeLight.enabled || activeLight.intensity <= 0f)
@@ -139,6 +146,12 @@ public class SmallMoth : MonoBehaviour
             dirToLightXZ.y = 0;
             if (dirToLightXZ.sqrMagnitude > m_lightDetectionRadius * m_lightDetectionRadius)
                 continue;
+
+            if (activeLight.transform.CompareTag("Flashlight"))
+            {
+                m_lightFromFlashlight = activeLight;
+                canSeeFlashlight = true;   
+            }
             
             float distanceToLight = dirToLightXZ.magnitude;
             float score = activeLight.intensity / (distanceToLight + 1f);
@@ -150,7 +163,11 @@ public class SmallMoth : MonoBehaviour
             }
         }
         
-        m_currentLightTarget = targetLight;
+        m_currentFascinationLightTarget = targetLight;
+        m_canSeeFlashlight = canSeeFlashlight;
+        
+        if(m_canSeeFlashlight == false)
+            m_lightFromFlashlight = null;
     }
 
     public void OnEnterAngelLight(AngelLamp angelLamp)
