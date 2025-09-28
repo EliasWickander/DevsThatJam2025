@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a8735d107466e4784d7cba0cbeb383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BigMoth
+  m_animator: {fileID: 7702748384155520720}
+  m_footstepClips: []
+  m_stepInterval: 0.5
   m_navmeshAgent: {fileID: 7790188314698570652}
   m_headTransform: {fileID: 1521590507247950448}
   m_turnRate: 5
@@ -204,10 +207,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b1870905a80f2d74bb88ea021db7604a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7702748384155520720}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b1870905a80f2d74bb88ea021db7604a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 328253270329910701}
   m_SourcePrefab: {fileID: 100100000, guid: b1870905a80f2d74bb88ea021db7604a, type: 3}
 --- !u!4 &6990438723278518638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b1870905a80f2d74bb88ea021db7604a, type: 3}
   m_PrefabInstance: {fileID: 7388647246521949829}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7658606838842581972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b1870905a80f2d74bb88ea021db7604a, type: 3}
+  m_PrefabInstance: {fileID: 7388647246521949829}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7702748384155520720
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658606838842581972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 626b2f08ff00baf4bbf58299e703dd38, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &328253270329910701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658606838842581972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655357ee908f6f41ac1c36d39cd7464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MothAnimationEventListener

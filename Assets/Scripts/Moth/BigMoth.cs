@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CustomToolkit.StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public enum EBigMothState
 {
@@ -13,6 +14,17 @@ public enum EBigMothState
 
 public class BigMoth : MonoBehaviour
 {
+    [SerializeField]
+    private Animator m_animator;
+    public Animator Animator => m_animator;
+    
+    [Header("Audio")]
+    [SerializeField] 
+    private AudioClip[] m_footstepClips; 
+    
+    [SerializeField] 
+    private float m_stepInterval = 0.5f;
+    
     [SerializeField]
     private NavMeshAgent m_navmeshAgent;
     public NavMeshAgent NavmeshAgent => m_navmeshAgent;
@@ -76,8 +88,16 @@ public class BigMoth : MonoBehaviour
     private bool m_canSeePlayer;
     public bool CanSeePlayer => m_canSeePlayer;
     
+    private float m_stepTimer = 0.0f;
+    
+    private int m_velocityHash = Animator.StringToHash("Velocity");
+    
+    private MothAnimationEventListener m_animationEventListener;
+    
     private void Awake()
     {
+        m_animationEventListener = GetComponentInChildren<MothAnimationEventListener>();
+        
         Dictionary<Enum, State> states = new Dictionary<Enum, State>()
         {
             {EBigMothState.State_Patrol, new State_Patrol(this)},
@@ -88,12 +108,33 @@ public class BigMoth : MonoBehaviour
         m_stateMachine = new StateMachine(states);
     }
 
+    private void OnEnable()
+    {
+        if (m_animationEventListener != null)
+        {
+            m_animationEventListener.OnStepEvent += PlayFootstep;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (m_animationEventListener != null)
+        {
+            m_animationEventListener.OnStepEvent -= PlayFootstep;
+        }
+    }
+
     private void Update()
     {
         m_canSeePlayer = IsPlayerInVision();
 
         if(m_stateMachine != null)
             m_stateMachine.Update();
+    }
+    
+    private void LateUpdate()
+    {
+        m_animator.SetFloat(m_velocityHash, m_navmeshAgent.velocity.magnitude);
     }
     
     private bool IsPlayerInVision()
@@ -136,5 +177,14 @@ public class BigMoth : MonoBehaviour
     public void SetPatrolPoints(Transform[] points)
     {
         m_patrolWaypoints = points;
+    }
+    
+    private void PlayFootstep()
+    {
+        if (m_footstepClips.Length == 0)
+            return;
+
+        AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
+        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
     }
 }
