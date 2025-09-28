@@ -22,8 +22,8 @@ public class BigMoth : MonoBehaviour
     [SerializeField] 
     private AudioClip[] m_footstepClips; 
     
-    [SerializeField] 
-    private float m_stepInterval = 0.5f;
+    [SerializeField]
+    private float m_maxHearDistance = 5.0f;
     
     [SerializeField]
     private NavMeshAgent m_navmeshAgent;
@@ -185,6 +185,6 @@ public class BigMoth : MonoBehaviour
             return;
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
-        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
+        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f, true, m_maxHearDistance);
     }
 }

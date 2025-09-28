@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BigMoth
   m_animator: {fileID: 7702748384155520720}
-  m_footstepClips: []
+  m_footstepClips:
+  - {fileID: 8300000, guid: 06b463439d0506841a215b18246216ea, type: 3}
+  - {fileID: 8300000, guid: 0cff74d839b0b00418d469134a7ad131, type: 3}
+  - {fileID: 8300000, guid: b8e12056741420d449bb24d02f5b667f, type: 3}
   m_stepInterval: 0.5
   m_navmeshAgent: {fileID: 7790188314698570652}
   m_headTransform: {fileID: 1521590507247950448}

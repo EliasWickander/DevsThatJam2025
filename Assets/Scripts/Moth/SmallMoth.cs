@@ -21,6 +21,9 @@ public class SmallMoth : MonoBehaviour
     private AudioClip[] m_footstepClips; 
     
     [SerializeField]
+    private float m_maxHearDistance = 5.0f;
+    
+    [SerializeField]
     private Animator m_animator;
     public Animator Animator => m_animator;
     
@@ -162,6 +165,6 @@ public class SmallMoth : MonoBehaviour
             return;
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
-        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
+        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f, true, m_maxHearDistance);
     }
 }

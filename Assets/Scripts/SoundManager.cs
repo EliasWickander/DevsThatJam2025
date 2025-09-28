@@ -6,7 +6,7 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] 
     private AudioSource soundFXObject;
     
-    public void PlaySoundFX(AudioClip audioClip, Transform spawnTransform, float volume)
+    public void PlaySoundFX(AudioClip audioClip, Transform spawnTransform, float volume, bool is3D = true, float maxDistance = 5.0f)
     {
         //spawn in gameObject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
@@ -16,6 +16,16 @@ public class SoundManager : Singleton<SoundManager>
 
         //assign volume
         audioSource.volume = volume;
+        
+        if(is3D)
+        {
+            audioSource.spatialBlend = 1.0f;
+            audioSource.maxDistance = maxDistance;
+        }
+        else
+        {
+            audioSource.spatialBlend = 0.0f;
+        }
 
         //play sound
         audioSource.Play();
