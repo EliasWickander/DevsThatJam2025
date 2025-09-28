@@ -19,6 +19,14 @@ public class GameManager : Singleton<GameManager>
     
     private int m_mothsAscended = 0;
 
+    [SerializeField]
+    private PlayerAngelLamp m_playerAngelLampPrefab;
+
+    public event Action OnBeginPlayerAscension;
+
+    [SerializeField]
+    private LayerMask m_roofLayerMask;
+
     protected override void OnSingletonAwake()
     {
         base.OnSingletonAwake();
@@ -42,14 +50,23 @@ public class GameManager : Singleton<GameManager>
     public void OnMothAscended()
     {
         m_mothsAscended++;
-        
         if(m_mothsAscended >= m_spawnManager.SmallMothAmount)
             OnAllMothsAscended();
     }
 
     private void OnAllMothsAscended()
     {
+        if (Physics.Raycast(GameContext.Player.transform.position, Vector3.up * 100, out RaycastHit hitInfo, Mathf.Infinity, m_roofLayerMask))
+        {
+            Instantiate(m_playerAngelLampPrefab, hitInfo.point, Quaternion.Euler(90, 0, 0));   
+            OnBeginPlayerAscension?.Invoke();
+        }
+    }
+
+    public void Win()
+    {
         Debug.Log("You win");
+
         SceneManager.LoadScene(m_levelScene);
     }
 }

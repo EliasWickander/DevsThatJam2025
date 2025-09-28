@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] 
-    private CharacterController m_characterController;
+    public CharacterController m_characterController;
     
     [Header("Audio")]
     [SerializeField] 
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 CurrentVelocity => m_currentVelocity;
 
     private float m_stepTimer = 0.0f;
+    
 
     private void OnValidate()
     {
@@ -54,12 +55,20 @@ public class PlayerController : MonoBehaviour
     {
         m_playerInput.OnMoveInputEvent += OnMoveInput;
         m_playerInput.OnToggleFlashlightInputEvent += OnToggleFlashlightInput;
+        GameManager.Instance.OnBeginPlayerAscension += OnBeginPlayerAscension;
+    }
+
+    private void OnBeginPlayerAscension()
+    {
+        m_characterController.enabled = false;
+        m_playerInput.enabled = false;
     }
 
     private void OnDisable()
     {
         m_playerInput.OnMoveInputEvent -= OnMoveInput;
         m_playerInput.OnToggleFlashlightInputEvent -= OnToggleFlashlightInput;
+        GameManager.Instance.OnBeginPlayerAscension -= OnBeginPlayerAscension;
     }
 
     private void Start()
@@ -69,8 +78,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
-        HandleFootsteps();
+        if (m_characterController.enabled)
+        {
+            HandleMovement();
+            HandleFootsteps();   
+        }
     }
 
     private void LateUpdate()

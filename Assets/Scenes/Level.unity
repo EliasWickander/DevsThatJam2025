@@ -185,7 +185,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6538082193989950716, guid: c1e195202cfd01949a2b068099ed1203, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1832702260}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e195202cfd01949a2b068099ed1203, type: 3}
 --- !u!4 &17086744 stripped
@@ -303,6 +306,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3823944040617063376, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
+      propertyPath: m_roofLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823944040617063376, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
+      propertyPath: m_playerAngelLampPrefab
+      value: 
+      objectReference: {fileID: -1329362677891471354, guid: abd77932e55518d4cb1b1e9a95a3c384, type: 3}
     - target: {fileID: 3823944040617063376, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
       propertyPath: 'm_patrolPoints.Array.data[0]'
       value: 
@@ -571,6 +582,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c805be261cfb60499c0e019599fd8f2, type: 3}
+--- !u!4 &1717222200 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6538082193989950716, guid: c1e195202cfd01949a2b068099ed1203, type: 3}
+  m_PrefabInstance: {fileID: 17086741}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1739729219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,6 +644,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64fae235463b78d499dcdb4856a83dfb, type: 3}
+--- !u!1 &1832702259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1832702260}
+  - component: {fileID: 1832702261}
+  m_Layer: 8
+  m_Name: RoofCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1832702260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832702259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.8, y: 6.18, z: 0}
+  m_LocalScale: {x: 100, y: 0.37068, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1717222200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1832702261
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832702259}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2037073659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7151976464689686193, guid: c1e195202cfd01949a2b068099ed1203, type: 3}

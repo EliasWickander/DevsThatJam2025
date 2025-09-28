@@ -66,6 +66,6 @@ public class State_Ascending : State
             return;
 
         Quaternion targetRot = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
-        m_mothOwner.HeadTransform.rotation = targetRot;
+        m_mothOwner.HeadTransform.rotation = Quaternion.Slerp(m_mothOwner.HeadTransform.rotation, targetRot, m_mothOwner.TurnRate * Time.deltaTime);
     }
 }
