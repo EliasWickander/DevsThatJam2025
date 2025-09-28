@@ -4,6 +4,41 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+// ---------- FOOTSTEP AUDIO ----------
+[Header("Footstep Audio")]
+[SerializeField] private AudioClip[] footstepClips; 
+[SerializeField] private float stepInterval = 0.5f;
+private float stepTimer = 0f;
+
+private void HandleFootsteps()
+{
+    Vector3 horizontalVelocity = new Vector3(CurrentVelocity.x, 0f, CurrentVelocity.z);
+
+    // Spela fotsteg om spelaren rör sig
+    if(horizontalVelocity.magnitude > 0.1f)
+    {
+        stepTimer += Time.deltaTime;
+        if(stepTimer >= stepInterval)
+        {
+            PlayFootstep();
+            stepTimer = 0f;
+        }
+    }
+}
+
+
+private void PlayFootstep()
+{
+    if(footstepClips.Length == 0 || SoundFXManager.instance == null)
+        return;
+
+    AudioClip clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
+    SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
+}
+
+
+
+
     [SerializeField] 
     private CharacterController m_characterController;
 
@@ -58,6 +93,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        HandleFootsteps(); // Lägg till här, direkt efter movement
     }
 
     private void LateUpdate()
