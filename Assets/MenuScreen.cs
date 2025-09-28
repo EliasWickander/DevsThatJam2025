@@ -17,6 +17,7 @@ public class MenuScreen : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(m_levelScene);
     }
     
