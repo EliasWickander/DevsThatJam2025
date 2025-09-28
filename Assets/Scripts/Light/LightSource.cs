@@ -5,6 +5,9 @@ public abstract class LightSource : MonoBehaviour
 {
     [SerializeField]
     protected Light m_lightObject;
+
+    [SerializeField]
+    private bool m_startAsOn = false;
     
     protected bool m_isOn = false;
     public bool IsOn => m_isOn;
@@ -13,7 +16,13 @@ public abstract class LightSource : MonoBehaviour
     protected virtual void Start()
     {
         LightManager.Instance.AddLightSource(this);
-        Toggle(m_lightObject.gameObject.activeSelf);
+
+        if (m_startAsOn)
+        {
+            m_isOn = true;
+            m_lightObject.gameObject.SetActive(true); 
+            OnToggled?.Invoke(m_lightObject, m_isOn);
+        }
     }
 
     public void Toggle(bool isOn)
