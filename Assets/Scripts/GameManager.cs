@@ -8,6 +8,10 @@ public class GameManager : Singleton<GameManager>
     [Scene]
     [SerializeField]
     private string m_levelScene;
+
+    [SerializeField]
+    private Transform[] m_patrolPoints;
+    public Transform[] PatrolPoints => m_patrolPoints;
     
     protected override void OnSingletonDestroy()
     {

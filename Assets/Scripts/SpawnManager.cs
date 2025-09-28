@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -7,31 +12,68 @@ public class SpawnManager : MonoBehaviour
     private PlayerController m_playerPrefab;
 
     [SerializeField]
+    private BigMoth m_bigMothPrefab;
+    
+    [SerializeField]
     private PlayerCamera m_playerCameraPrefab;
     
     [SerializeField]
-    private Transform[] m_playerSpawnPoints;
+    private Transform[] m_spawnPoints;
+    
+    private List<Transform> m_activeSpawnPoints = new List<Transform>();
     
     private void Awake()
     {
+        m_activeSpawnPoints = m_spawnPoints.ToList();
+    }
+
+    private void Start()
+    {
         SpawnPlayer();
+        SpawnBigMoth();
     }
 
     private void SpawnPlayer()
     {
-        if (m_playerPrefab != null && m_playerSpawnPoints.Length > 0)
+        if (m_playerPrefab != null)
         {
-            int spawnIndex = Random.Range(0, m_playerSpawnPoints.Length);
-            Transform spawnPoint = m_playerSpawnPoints[spawnIndex];
+            GameObject spawnedPlayer = SpawnAtRandomActiveSpawnPoint(m_playerPrefab.gameObject);
 
-            PlayerController spawnedPlayer = Instantiate(m_playerPrefab, spawnPoint.position, spawnPoint.rotation);
-
-            if (m_playerCameraPrefab != null)
+            if (spawnedPlayer != null)
             {
-                PlayerCamera spawnedPlayerCamera = Instantiate(m_playerCameraPrefab);
-                spawnedPlayerCamera.CinemachineCamera.Follow = spawnedPlayer.HeadTransform;
-                spawnedPlayerCamera.CinemachinePanTilt.PanAxis.Value = spawnedPlayer.HeadTransform.eulerAngles.y;
+                PlayerController playerController = spawnedPlayer.GetComponent<PlayerController>();
+                
+                if (m_playerCameraPrefab != null)
+                {
+                    PlayerCamera spawnedPlayerCamera = Instantiate(m_playerCameraPrefab);
+                    spawnedPlayerCamera.CinemachineCamera.Follow = playerController.HeadTransform;
+                    spawnedPlayerCamera.CinemachinePanTilt.PanAxis.Value = playerController.HeadTransform.eulerAngles.y;
+                }
             }
         }
+    }
+
+    private void SpawnBigMoth()
+    {
+        if(m_bigMothPrefab != null)
+        {
+            GameObject spawnedBigMothObject = SpawnAtRandomActiveSpawnPoint(m_bigMothPrefab.gameObject);
+            BigMoth bigMoth = spawnedBigMothObject.GetComponent<BigMoth>();
+            bigMoth.SetPatrolPoints(GameManager.Instance.PatrolPoints);
+        }
+    }
+
+    private GameObject SpawnAtRandomActiveSpawnPoint(GameObject prefab)
+    {
+        if (m_activeSpawnPoints.Count > 0)
+        {
+            int spawnIndex = Random.Range(0, m_activeSpawnPoints.Count);
+            Transform spawnPoint = m_activeSpawnPoints[spawnIndex];
+            m_activeSpawnPoints.Remove(spawnPoint);
+            
+            return Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
+        }
+        
+        return null;
     }
 }

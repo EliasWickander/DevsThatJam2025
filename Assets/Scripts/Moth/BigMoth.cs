@@ -53,8 +53,7 @@ public class BigMoth : MonoBehaviour
     [SerializeField]
     private float m_waitTimeMax = 5.0f;
     public float WaitTimeMax => m_waitTimeMax;
-    
-    [SerializeField]
+
     private Transform[] m_patrolWaypoints;
     public Transform[] PatrolWaypoints => m_patrolWaypoints;
     
@@ -79,8 +78,6 @@ public class BigMoth : MonoBehaviour
     
     private void Awake()
     {
-        m_navmeshAgent.updateRotation = false;
-        
         Dictionary<Enum, State> states = new Dictionary<Enum, State>()
         {
             {EBigMothState.State_Patrol, new State_Patrol(this)},
@@ -134,5 +131,10 @@ public class BigMoth : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(dirToTargetXZ);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, m_turnRate * Time.deltaTime);
         }
+    }
+
+    public void SetPatrolPoints(Transform[] points)
+    {
+        m_patrolWaypoints = points;
     }
 }

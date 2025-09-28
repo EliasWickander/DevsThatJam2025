@@ -19,6 +19,7 @@ public class State_Chase : State
 
     public override void OnEnter(State prevState)
     {
+        m_navAgent.updateRotation = false;
         m_targetPlayer = GameContext.Player.transform;
         m_navAgent.speed = m_mothOwner.ChaseSpeed;
         m_losePlayerTimer = m_mothOwner.LosePlayerTime;
