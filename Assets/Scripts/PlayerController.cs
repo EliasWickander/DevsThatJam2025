@@ -1,47 +1,22 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
-// ---------- FOOTSTEP AUDIO ----------
-[Header("Footstep Audio")]
-[SerializeField] private AudioClip[] footstepClips; 
-[SerializeField] private float stepInterval = 0.5f;
-private float stepTimer = 0f;
-
-private void HandleFootsteps()
-{
-    Vector3 horizontalVelocity = new Vector3(CurrentVelocity.x, 0f, CurrentVelocity.z);
-
-    // Spela fotsteg om spelaren rör sig
-    if(horizontalVelocity.magnitude > 0.1f)
-    {
-        stepTimer += Time.deltaTime;
-        if(stepTimer >= stepInterval)
-        {
-            PlayFootstep();
-            stepTimer = 0f;
-        }
-    }
-}
-
-
-private void PlayFootstep()
-{
-    if(footstepClips.Length == 0 || SoundFXManager.instance == null)
-        return;
-
-    AudioClip clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
-    SoundFXManager.instance.PlaySoundFXClip(clip, transform, 1f);
-}
-
-
-
-
     [SerializeField] 
     private CharacterController m_characterController;
-
+    
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource m_audioSource;
+    [SerializeField] 
+    private AudioClip[] m_footstepClips; 
+    
+    [SerializeField] 
+    private float m_stepInterval = 0.5f;
+    
     [SerializeField]
     private PlayerInput m_playerInput;
     
@@ -66,6 +41,8 @@ private void PlayFootstep()
     private Vector2 m_currentMoveInput;
     private Vector3 m_currentVelocity = Vector3.zero;
     public Vector3 CurrentVelocity => m_currentVelocity;
+
+    private float m_stepTimer = 0.0f;
 
     private void OnValidate()
     {
@@ -93,7 +70,7 @@ private void PlayFootstep()
     private void Update()
     {
         HandleMovement();
-        HandleFootsteps(); // Lägg till här, direkt efter movement
+        HandleFootsteps();
     }
 
     private void LateUpdate()
@@ -150,5 +127,32 @@ private void PlayFootstep()
     public void Kill()
     {
         GameManager.Instance.GameOver();
+    }
+
+    private void HandleFootsteps()
+    {
+        if(m_currentVelocity.magnitude > 0.1f)
+        {
+            m_stepTimer += Time.deltaTime;
+            if(m_stepTimer >= m_stepInterval)
+            {
+                PlayFootstep();
+                m_stepTimer = 0f;
+            }
+        }
+        else
+        {
+            m_stepTimer = m_stepInterval;
+        }
+    }
+    private void PlayFootstep()
+    {
+        if (m_footstepClips.Length == 0)
+            return;
+
+        AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
+        
+        m_audioSource.clip = clip;
+        m_audioSource.Play();
     }
 }
