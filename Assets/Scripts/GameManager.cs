@@ -2,6 +2,7 @@ using System;
 using CustomToolkit.AdvancedTypes;
 using CustomToolkit.Attributes;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -27,6 +28,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private LayerMask m_roofLayerMask;
 
+    public UnityEvent OnWon;
+    public UnityEvent OnLost;
+
     protected override void OnSingletonAwake()
     {
         base.OnSingletonAwake();
@@ -43,13 +47,15 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        Debug.Log("Game over!");
-        SceneManager.LoadScene(m_levelScene);
+        Debug.Log("You lost");
+        Time.timeScale = 0;
+        OnLost?.Invoke();
     }
 
     public void OnMothAscended()
     {
         m_mothsAscended++;
+        OnAllMothsAscended();
         if(m_mothsAscended >= m_spawnManager.SmallMothAmount)
             OnAllMothsAscended();
     }
@@ -66,7 +72,7 @@ public class GameManager : Singleton<GameManager>
     public void Win()
     {
         Debug.Log("You win");
-
-        SceneManager.LoadScene(m_levelScene);
+        Time.timeScale = 0;
+        OnWon?.Invoke();
     }
 }
