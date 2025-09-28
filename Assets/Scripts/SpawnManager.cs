@@ -15,7 +15,13 @@ public class SpawnManager : MonoBehaviour
     private BigMoth m_bigMothPrefab;
     
     [SerializeField]
+    private SmallMoth m_smallMothPrefab;
+    
+    [SerializeField]
     private PlayerCamera m_playerCameraPrefab;
+
+    [SerializeField]
+    private int m_smallMothAmount = 3;
     
     [SerializeField]
     private Transform[] m_spawnPoints;
@@ -31,6 +37,7 @@ public class SpawnManager : MonoBehaviour
     {
         SpawnPlayer();
         SpawnBigMoth();
+        SpawnSmallMoths();
     }
 
     private void SpawnPlayer()
@@ -60,6 +67,17 @@ public class SpawnManager : MonoBehaviour
             GameObject spawnedBigMothObject = SpawnAtRandomActiveSpawnPoint(m_bigMothPrefab.gameObject);
             BigMoth bigMoth = spawnedBigMothObject.GetComponent<BigMoth>();
             bigMoth.SetPatrolPoints(GameManager.Instance.PatrolPoints);
+        }
+    }
+    
+    private void SpawnSmallMoths()
+    {
+        if (m_smallMothPrefab != null)
+        {
+            for(int i = 0; i < m_smallMothAmount; i++)
+            {
+                SpawnAtRandomActiveSpawnPoint(m_smallMothPrefab.gameObject);
+            }
         }
     }
 

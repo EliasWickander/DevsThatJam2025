@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1e723d4860fcdde418584070911fc196, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -301,6 +301,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7311008706960655112, guid: 0c805be261cfb60499c0e019599fd8f2, type: 3}
     - target: {fileID: 5968248644482493839, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
+      propertyPath: m_smallMothPrefab
+      value: 
+      objectReference: {fileID: 1356074590128963809, guid: 87bbce6ccd7978b4d8559e43bf519fad, type: 3}
+    - target: {fileID: 5968248644482493839, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
       propertyPath: m_spawnPoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -417,7 +421,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832575517}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
