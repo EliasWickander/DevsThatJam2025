@@ -124,6 +124,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  m_spawnManager: {fileID: 0}
+  m_playerAngelLampPrefab: {fileID: -1329362677891471354, guid: abd77932e55518d4cb1b1e9a95a3c384, type: 3}
+  m_roofLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &5487446684706867515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +161,11 @@ MonoBehaviour:
   m_smallMothAmount: 3
   m_spawnPoints:
   - {fileID: 0}
-  m_peacefulMode: 1
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_peacefulMode: 0
 --- !u!114 &6254122940084971338
 MonoBehaviour:
   m_ObjectHideFlags: 0
