@@ -22,6 +22,8 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private int m_smallMothAmount = 3;
+
+    public int SmallMothAmount => m_smallMothAmount;
     
     [SerializeField]
     private Transform[] m_spawnPoints;

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8286838194437780895}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_Leg_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3197764411700472631}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_Arm_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3103333553368725427}
   - component: {fileID: 6588900193920793465}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_L_EYE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6374672877812777586}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CTRL_L_EYE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,13 +238,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 45a0b888a6c4ea445bdd506957dc2ecc, type: 3}
   - {fileID: 8300000, guid: 5b1c9c45b49fcb342b91d4835c0eacf8, type: 3}
   - {fileID: 8300000, guid: f2eae09bf36180944ae863e64debebab, type: 3}
-  m_stepInterval: 0.5
+  m_maxHearDistance: 5
   m_animator: {fileID: 7190581118861055799}
   m_headTransform: {fileID: 2588848727961921481}
   m_timeToAscend: 5
   m_turnRate: 5
   m_lightDetectionRadius: 10
-  m_lightFollowDistanceThreshold: 1
+  m_lightFollowDistanceThreshold: 4
   m_navmeshAgent: {fileID: 7790188314698570652}
 --- !u!195 &7790188314698570652
 NavMeshAgent:
@@ -304,7 +304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4254472343152576869}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_ARM_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8491513090602493133}
   - component: {fileID: 3910295323585697415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7529424229839106239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_Stronk_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2301651966405711495}
   - component: {fileID: 8710385114331310765}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_Stronks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 334770454570878047}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_ARM_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3630426577323392817}
   - component: {fileID: 4689716634896151425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_L_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 665177990016199903}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NULL_JT_R_Stronk_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8005659665135172031}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NULL_JT_L_Arm_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4024136635992229285}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_Stronk_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,7 +782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6646361877417215894}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_Hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827891213720328342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CTRL_Jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5171217474817534520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NULL_JT_R_Leg_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -880,7 +880,7 @@ GameObject:
   - component: {fileID: 4366229653086807414}
   - component: {fileID: 7190581118861055799}
   - component: {fileID: 4047987691517273139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SKM_SmallMoth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6803464473809162141}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -987,7 +987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4648154230080093802}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CTRL_R_EYE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5208634192636637143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_Leg_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1050,7 +1050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9021300512551352757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CTRL_Hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 436730452423269326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_Shoulders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1116,7 +1116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3091785201143885131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NULL_JT_R_Arm_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1148,7 +1148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4649606601214746942}
   - component: {fileID: 2377783597119594249}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_L_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1241,7 +1241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4337634979470720974}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_Stronk_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,7 +1274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4757923358121372797}
   - component: {fileID: 6038856208543264339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_R_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1366,7 +1366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653844800949473817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2588848727961921481}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1433,7 +1433,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4362663613866185527}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_Stronk_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1497,7 +1497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570375021255835937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NULL_JT_L_Leg_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1528,7 +1528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5446685575138820081}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1559,7 +1559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7202778802628829088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NULL_JT_L_Stronk_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1591,7 +1591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8855019483240541767}
   - component: {fileID: 7401171907798843737}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_R_EYE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1682,7 +1682,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7682490026790759282}
-  m_Layer: 0
+  - component: {fileID: 4447896219479669336}
+  - component: {fileID: 8173151290876181559}
+  m_Layer: 7
   m_Name: CTRL_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1707,6 +1709,41 @@ Transform:
   - {fileID: 4648154230080093802}
   m_Father: {fileID: 9021300512551352757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4447896219479669336
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8523204500143787979}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8173151290876181559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8523204500143787979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9902941228c2340907041f285c7756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionTrigger
 --- !u!1 &8540725796269096633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,7 +1753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9158027537145196042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_Jaw_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1747,7 +1784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8071762990413613738}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_L_Leg_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1780,7 +1817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7808342330913337255}
   - component: {fileID: 6377195588733116262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmallMoth_R_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1873,7 +1910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4940578286489283217}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_Leg_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1905,7 +1942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1369093221197511385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JT_R_Arm_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

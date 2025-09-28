@@ -10,8 +10,7 @@ public enum ESmallMothState
 {
     State_Idle,
     State_MoveTowardsLight,
-    State_Ascending,
-    State_Descending
+    State_Ascending
 }
 
 public class SmallMoth : MonoBehaviour
@@ -19,6 +18,9 @@ public class SmallMoth : MonoBehaviour
     [Header("Audio")]
     [SerializeField] 
     private AudioClip[] m_footstepClips; 
+    
+    [SerializeField]
+    private float m_maxHearDistance = 5.0f;
     
     [SerializeField]
     private Animator m_animator;
@@ -51,8 +53,8 @@ public class SmallMoth : MonoBehaviour
     private StateMachine m_stateMachine;
     public StateMachine StateMachine => m_stateMachine;
 
-    private Light m_currentLightTarget;
-    public Light CurrentLightTarget => m_currentLightTarget;
+    private Light m_currentFascinationLightTarget;
+    public Light CurrentFascinationLightTarget => m_currentFascinationLightTarget;
     
     private AngelLamp m_targetAngelLamp;
     public AngelLamp TargetAngelLamp => m_targetAngelLamp;
@@ -61,8 +63,17 @@ public class SmallMoth : MonoBehaviour
     public Rigidbody Rigidbody => m_rigidbody;
     
     private int m_velocityHash = Animator.StringToHash("Velocity");
+    private int m_isAscendingHash = Animator.StringToHash("IsAscending");
 
     private MothAnimationEventListener m_animationEventListener;
+    
+    private bool m_canSeeFlashlight = false;
+    public bool CanSeeFlashlight => m_canSeeFlashlight;
+    
+    private Light m_lightFromFlashlight;
+    public Light LightFromFlashlight => m_lightFromFlashlight;
+    
+    public event Action OnAscendComplete;
     
     private void Awake()
     {
@@ -101,18 +112,7 @@ public class SmallMoth : MonoBehaviour
         if(m_stateMachine == null)
             return;
         
-        if ((ESmallMothState)m_stateMachine.CurrentStateType == ESmallMothState.State_Ascending)
-        {
-            if (m_targetAngelLamp == null || !m_targetAngelLamp.IsOn)
-            {
-                m_targetAngelLamp = null;
-                m_stateMachine.SetState(ESmallMothState.State_Idle);
-            }
-        }
-        else
-        {
-            UpdateLightTarget();   
-        }
+        UpdateLightTarget();  
         
         m_stateMachine.Update();
     }
@@ -127,6 +127,7 @@ public class SmallMoth : MonoBehaviour
         Light targetLight = null;
         float bestScore = 0f;
         
+        bool canSeeFlashlight = false;
         foreach (Light activeLight in LightManager.Instance.ActiveLights)
         {
             if (!activeLight.enabled || activeLight.intensity <= 0f)
@@ -136,6 +137,12 @@ public class SmallMoth : MonoBehaviour
             dirToLightXZ.y = 0;
             if (dirToLightXZ.sqrMagnitude > m_lightDetectionRadius * m_lightDetectionRadius)
                 continue;
+
+            if (activeLight.transform.CompareTag("Flashlight"))
+            {
+                m_lightFromFlashlight = activeLight;
+                canSeeFlashlight = true;   
+            }
             
             float distanceToLight = dirToLightXZ.magnitude;
             float score = activeLight.intensity / (distanceToLight + 1f);
@@ -147,13 +154,25 @@ public class SmallMoth : MonoBehaviour
             }
         }
         
-        m_currentLightTarget = targetLight;
+        m_currentFascinationLightTarget = targetLight;
+        m_canSeeFlashlight = canSeeFlashlight;
+        
+        if(m_canSeeFlashlight == false)
+            m_lightFromFlashlight = null;
     }
 
     public void OnEnterAngelLight(AngelLamp angelLamp)
     {
         m_targetAngelLamp = angelLamp;
         m_stateMachine.SetState(ESmallMothState.State_Ascending);
+        m_animator.SetBool(m_isAscendingHash, true);
+    }
+
+    public void OnAscended()
+    {
+        OnAscendComplete?.Invoke();
+        GameManager.Instance.OnMothAscended();
+        Destroy(gameObject);
     }
     
     private void PlayFootstep()
@@ -162,6 +181,6 @@ public class SmallMoth : MonoBehaviour
             return;
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
-        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
+        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f, true, m_maxHearDistance);
     }
 }
