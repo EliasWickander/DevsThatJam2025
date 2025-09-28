@@ -7,6 +7,7 @@ public abstract class LightSource : MonoBehaviour
     protected Light m_lightObject;
     
     protected bool m_isOn = false;
+    public bool IsOn => m_isOn;
     public event Action<Light, bool> OnToggled;
     
     protected virtual void Start()
@@ -36,7 +37,7 @@ public abstract class LightSource : MonoBehaviour
         Toggle(false);
         LightManager.Instance.RemoveLightSource(this);
     }
-
+    
     protected virtual void OnToggle(bool isOn)
     {
         if (m_lightObject != null && m_lightObject.gameObject.activeSelf != isOn)

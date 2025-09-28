@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Lamp : LightSource
+public class FlickeringLamp : LightSource
 {
     [SerializeField] 
     private float m_minIntensity = 0.8f;

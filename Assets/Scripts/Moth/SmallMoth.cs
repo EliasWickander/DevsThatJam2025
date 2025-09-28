@@ -9,6 +9,8 @@ public enum ESmallMothState
 {
     State_Idle,
     State_MoveTowardsLight,
+    State_Ascending,
+    State_Descending
 }
 
 public class SmallMoth : MonoBehaviour
@@ -16,6 +18,10 @@ public class SmallMoth : MonoBehaviour
     [SerializeField]
     private Transform m_headTransform;
     public Transform HeadTransform => m_headTransform;
+    
+    [SerializeField]
+    private float m_timeToAscend = 5.0f;
+    public float TimeToAscend => m_timeToAscend;
     
     [SerializeField]
     private float m_turnRate = 5.0f;
@@ -39,6 +45,12 @@ public class SmallMoth : MonoBehaviour
     private Light m_currentLightTarget;
     public Light CurrentLightTarget => m_currentLightTarget;
     
+    private AngelLamp m_targetAngelLamp;
+    public AngelLamp TargetAngelLamp => m_targetAngelLamp;
+    
+    private Rigidbody m_rigidbody;
+    public Rigidbody Rigidbody => m_rigidbody;
+    
     private void Awake()
     {
         m_navmeshAgent.updateRotation = false;
@@ -47,6 +59,7 @@ public class SmallMoth : MonoBehaviour
         {
             {ESmallMothState.State_Idle, new State_Idle(this)},
             {ESmallMothState.State_MoveTowardsLight, new State_MoveTowardsLight(this)},
+            {ESmallMothState.State_Ascending, new State_Ascending(this)},
         };
         
         m_stateMachine = new StateMachine(states);
@@ -54,10 +67,23 @@ public class SmallMoth : MonoBehaviour
 
     private void Update()
     {
-        UpdateLightTarget();
+        if(m_stateMachine == null)
+            return;
         
-        if(m_stateMachine != null)
-            m_stateMachine.Update();
+        if ((ESmallMothState)m_stateMachine.CurrentStateType == ESmallMothState.State_Ascending)
+        {
+            if (m_targetAngelLamp == null || !m_targetAngelLamp.IsOn)
+            {
+                m_targetAngelLamp = null;
+                m_stateMachine.SetState(ESmallMothState.State_Idle);
+            }
+        }
+        else
+        {
+            UpdateLightTarget();   
+        }
+        
+        m_stateMachine.Update();
     }
     
     private void UpdateLightTarget()
@@ -86,5 +112,11 @@ public class SmallMoth : MonoBehaviour
         }
         
         m_currentLightTarget = targetLight;
+    }
+
+    public void OnEnterAngelLight(AngelLamp angelLamp)
+    {
+        m_targetAngelLamp = angelLamp;
+        m_stateMachine.SetState(ESmallMothState.State_Ascending);
     }
 }

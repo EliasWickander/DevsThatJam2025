@@ -9,6 +9,9 @@ namespace CustomToolkit.StateMachine
         public Dictionary<Enum, State> m_states;
 
         private State m_currentState;
+        public State CurrentState => m_currentState;
+        private Enum m_currentStateType;
+        public Enum CurrentStateType => m_currentStateType;
 
         public StateMachine(Dictionary<Enum, State> states)
         {
@@ -37,6 +40,7 @@ namespace CustomToolkit.StateMachine
             newState.OnEnter(oldState);
 
             m_currentState = newState;
+            m_currentStateType = state;
         }
     }   
 }
