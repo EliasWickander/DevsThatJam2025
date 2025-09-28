@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 6263316684517309979}
   - component: {fileID: 2556947912903457502}
   - component: {fileID: 5872920197437714240}
+  - component: {fileID: 2346669321223444485}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -311,7 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9b5fedac1c12d41b49e75fa275310c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
-  m_playerController: {fileID: 5872920197437714240}
 --- !u!114 &5872920197437714240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,11 +325,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   m_characterController: {fileID: 6263316684517309979}
+  m_playerInput: {fileID: 2556947912903457502}
   m_headTransform: {fileID: 3792654706253814119}
   m_handTransform: {fileID: 3345129541764244796}
   m_handPositionOffset: {x: 0.3, y: -0.3, z: 0.5}
   m_flashLight: {fileID: 7676683681362605069}
   m_moveSpeed: 8
+--- !u!114 &2346669321223444485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326474830844820083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3dfc041c21ea048ad87944287fd42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  m_playerInput: {fileID: 2556947912903457502}
+  m_interactionRadius: 3
+  m_interactionWidth: 0.5
+  m_interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &5786440840276976120
 GameObject:
   m_ObjectHideFlags: 0

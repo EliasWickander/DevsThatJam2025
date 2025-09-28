@@ -25,6 +25,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "31eb6f4b-97d8-465d-b672-981e8779e125",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Toggle Flashlight",
                     "type": "Button",
                     "id": "0966e819-697b-4fed-8bb2-9d2d0268f954",
@@ -192,11 +201,22 @@
                 {
                     "name": "",
                     "id": "e2ddb5cc-1d7a-4794-942e-dc1cc4c00167",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Toggle Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6ae1f8c-01d0-4f0d-ad4d-9a2d4daf5727",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

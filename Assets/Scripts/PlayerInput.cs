@@ -4,10 +4,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerController m_playerController;
-    
     private PlayerInput_Actions m_inputActions;
+    
+    public event Action<Vector2> OnMoveInputEvent;
+    public event Action OnInteractInputEvent;
+    public event Action OnToggleFlashlightInputEvent;
     
     private void OnEnable()
     {
@@ -15,14 +16,16 @@ public class PlayerInput : MonoBehaviour
         m_inputActions.Enable();
 
         m_inputActions.Player.Move.performed += OnMoveInput;
-        m_inputActions.Player.Move.canceled += OnMoveInput;
+        m_inputActions.Player.Move.canceled += OnMoveInputCancelled;
+        m_inputActions.Player.Interact.performed += OnInteractInput;
         m_inputActions.Player.ToggleFlashlight.performed += OnToggleFlashlightInput;
     }
 
     private void OnDisable()
     {
         m_inputActions.Player.Move.performed -= OnMoveInput;
-        m_inputActions.Player.Move.canceled -= OnMoveInput;
+        m_inputActions.Player.Move.canceled -= OnMoveInputCancelled;
+        m_inputActions.Player.Interact.performed -= OnInteractInput;
         m_inputActions.Player.ToggleFlashlight.performed -= OnToggleFlashlightInput;
         
         m_inputActions.Disable();
@@ -30,16 +33,21 @@ public class PlayerInput : MonoBehaviour
     
     private void OnMoveInput(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = context.ReadValue<Vector2>();
-        
-        m_playerController.OnMoveInput(moveInput);
+        OnMoveInputEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+    
+    private void OnMoveInputCancelled(InputAction.CallbackContext context)
+    {
+        OnMoveInputEvent?.Invoke(Vector2.zero);
+    }
+    
+    private void OnInteractInput(InputAction.CallbackContext context)
+    {
+        OnInteractInputEvent?.Invoke();
     }
     
     private void OnToggleFlashlightInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            m_playerController.OnToggleFlashlightInput();
-        }
+        OnToggleFlashlightInputEvent?.Invoke();
     }
 }

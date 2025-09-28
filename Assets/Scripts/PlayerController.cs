@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController m_characterController;
 
     [SerializeField]
+    private PlayerInput m_playerInput;
+    
+    [SerializeField]
     private Transform m_headTransform;
     public Transform HeadTransform => m_headTransform;
     
@@ -32,6 +35,19 @@ public class PlayerController : MonoBehaviour
     private void OnValidate()
     {
         m_characterController = GetComponent<CharacterController>();
+        m_playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void OnEnable()
+    {
+        m_playerInput.OnMoveInputEvent += OnMoveInput;
+        m_playerInput.OnToggleFlashlightInputEvent += OnToggleFlashlightInput;
+    }
+
+    private void OnDisable()
+    {
+        m_playerInput.OnMoveInputEvent -= OnMoveInput;
+        m_playerInput.OnToggleFlashlightInputEvent -= OnToggleFlashlightInput;
     }
 
     private void Start()
