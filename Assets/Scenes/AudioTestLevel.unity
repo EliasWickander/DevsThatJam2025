@@ -230,6 +230,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &124460393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 124460395}
+  - component: {fileID: 124460394}
+  m_Layer: 0
+  m_Name: SoundFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &124460394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124460393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2804c7a0a27314e852915351d5909a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundFXManager
+  soundFXObject: {fileID: 1772767627269007240, guid: 431e10d7a169909459af1c7b48b2d5ad, type: 3}
+--- !u!4 &124460395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124460393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &135021311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1139764694491523894, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
+  m_PrefabInstance: {fileID: 334163208}
+  m_PrefabAsset: {fileID: 0}
+--- !u!81 &135021314
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135021311}
+  m_Enabled: 1
 --- !u!1001 &334163208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,7 +391,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1139764694491523894, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 135021314}
   m_SourcePrefab: {fileID: 100100000, guid: 763ed26c2c56b5645b3d5754bf12b2d5, type: 3}
 --- !u!1001 &781340585
 PrefabInstance:
@@ -847,6 +908,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LampSwitch (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8901015183937392913, guid: f99308c898c3bb5418762c4bd8727177, type: 3}
+      propertyPath: m_turnOnLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 807163032ed1c38478a0c9afc9ae2262, type: 3}
+    - target: {fileID: 8901015183937392913, guid: f99308c898c3bb5418762c4bd8727177, type: 3}
+      propertyPath: toggleAction
+      value: 
+      objectReference: {fileID: -6323087944700873183, guid: a4adc60e4b40fec43ac9bceb677bd8f3, type: 3}
+    - target: {fileID: 8901015183937392913, guid: f99308c898c3bb5418762c4bd8727177, type: 3}
+      propertyPath: m_turnOffLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 79cc73b0fce1c7b48888904977a960c5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -917,6 +990,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOnLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 807163032ed1c38478a0c9afc9ae2262, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOffLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 79cc73b0fce1c7b48888904977a960c5, type: 3}
     - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
       propertyPath: m_maxIntensity
       value: 3
@@ -993,3 +1074,4 @@ SceneRoots:
   - {fileID: 2112484163}
   - {fileID: 2143281805}
   - {fileID: 1417065967}
+  - {fileID: 124460395}
