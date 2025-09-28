@@ -50,6 +50,8 @@ public class State_Ascending : State
         
         m_mothOwner.transform.position = Vector3.Lerp(m_startMothPosition, targetAngelLamp.transform.position, AscendProgress);
         m_ascendTimer += Time.deltaTime;
+        
+        RotateHeadTowards(m_mothOwner.TargetAngelLamp.transform.position);
     }
     
     public override void OnExit(State nextState)
@@ -60,5 +62,16 @@ public class State_Ascending : State
     private void OnReachedTargetLight()
     {
         
+    }
+    
+    private void RotateHeadTowards(Vector3 targetPosition)
+    {
+        Vector3 toTarget = targetPosition - m_mothOwner.HeadTransform.position;
+
+        if (toTarget.sqrMagnitude < 0.0001f)
+            return;
+
+        Quaternion targetRot = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
+        m_mothOwner.HeadTransform.rotation = Quaternion.Slerp(m_mothOwner.HeadTransform.rotation, targetRot, m_mothOwner.TurnRate * Time.deltaTime);
     }
 }

@@ -10,8 +10,7 @@ public enum ESmallMothState
 {
     State_Idle,
     State_MoveTowardsLight,
-    State_Ascending,
-    State_Descending
+    State_Ascending
 }
 
 public class SmallMoth : MonoBehaviour
@@ -64,6 +63,7 @@ public class SmallMoth : MonoBehaviour
     public Rigidbody Rigidbody => m_rigidbody;
     
     private int m_velocityHash = Animator.StringToHash("Velocity");
+    private int m_isAscendingHash = Animator.StringToHash("IsAscending");
 
     private MothAnimationEventListener m_animationEventListener;
     
@@ -174,6 +174,7 @@ public class SmallMoth : MonoBehaviour
     {
         m_targetAngelLamp = angelLamp;
         m_stateMachine.SetState(ESmallMothState.State_Ascending);
+        m_animator.SetBool(m_isAscendingHash, true);
     }
     
     private void PlayFootstep()
