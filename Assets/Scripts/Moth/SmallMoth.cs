@@ -4,6 +4,7 @@ using CustomToolkit.StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public enum ESmallMothState
 {
@@ -15,9 +16,9 @@ public enum ESmallMothState
 
 public class SmallMoth : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource m_audioSource;
-    public AudioSource AudioSource => m_audioSource;
+    [Header("Audio")]
+    [SerializeField] 
+    private AudioClip[] m_footstepClips; 
     
     [SerializeField]
     private Animator m_animator;
@@ -60,9 +61,13 @@ public class SmallMoth : MonoBehaviour
     public Rigidbody Rigidbody => m_rigidbody;
     
     private int m_velocityHash = Animator.StringToHash("Velocity");
+
+    private MothAnimationEventListener m_animationEventListener;
     
     private void Awake()
     {
+        m_animationEventListener = GetComponentInChildren<MothAnimationEventListener>();
+        
         m_navmeshAgent.updateRotation = false;
         
         Dictionary<Enum, State> states = new Dictionary<Enum, State>()
@@ -73,6 +78,22 @@ public class SmallMoth : MonoBehaviour
         };
         
         m_stateMachine = new StateMachine(states);
+    }
+
+    private void OnEnable()
+    {
+        if (m_animationEventListener != null)
+        {
+            m_animationEventListener.OnStepEvent += PlayFootstep;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (m_animationEventListener != null)
+        {
+            m_animationEventListener.OnStepEvent -= PlayFootstep;
+        }
     }
 
     private void Update()
@@ -133,5 +154,14 @@ public class SmallMoth : MonoBehaviour
     {
         m_targetAngelLamp = angelLamp;
         m_stateMachine.SetState(ESmallMothState.State_Ascending);
+    }
+    
+    private void PlayFootstep()
+    {
+        if (m_footstepClips.Length == 0)
+            return;
+
+        AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
+        SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
     }
 }
