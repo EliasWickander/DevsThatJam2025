@@ -60,9 +60,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 799f3992a7e75f74398c09d8576788a9, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 2bb3f423a1b5f4b489e9060c61ccb1e8, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5252834800872201324
 GameObject:
@@ -139,8 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
   m_playerPrefab: {fileID: 5872920197437714240, guid: 9f8e28bcff940fa40a11035314a0d38f, type: 3}
-  m_playerCameraPrefab: {fileID: 8423323527602024867, guid: c2dcd9e58f03be947814f4b34648e93a, type: 3}
-  m_playerSpawnPoints: []
+  m_playerCameraPrefab: {fileID: 1889699341230208692, guid: c2dcd9e58f03be947814f4b34648e93a, type: 3}
+  m_playerSpawnPoints:
+  - {fileID: 0}
 --- !u!1001 &4994914465214434856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,15 +212,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8642893683105153185, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.99292994
+      value: 5.79063
       objectReference: {fileID: 0}
     - target: {fileID: 8642893683105153185, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8642893683105153185, guid: 8387614fd77973c45b84500fd482aadd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.196341
+      value: 11.99375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

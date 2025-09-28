@@ -11,7 +11,7 @@ public class State_Attack : State
 
     public override void OnEnter(State prevState)
     {
-        
+        GameContext.Player.Kill();
     }
 
     public override void Update()

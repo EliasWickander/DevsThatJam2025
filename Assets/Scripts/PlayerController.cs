@@ -110,4 +110,9 @@ public class PlayerController : MonoBehaviour
         float lightIntensity = LightManager.Instance.GetLightIntensityAtPosition(CenterPosition);
         return lightIntensity < 0.1f;
     }
+
+    public void Kill()
+    {
+        GameManager.Instance.GameOver();
+    }
 }
