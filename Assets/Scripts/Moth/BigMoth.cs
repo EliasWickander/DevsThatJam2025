@@ -20,6 +20,10 @@ public class BigMoth : MonoBehaviour
     [SerializeField]
     private Transform m_headTransform;
     
+    [SerializeField]
+    private float m_turnRate = 5.0f;
+    public float TurnRate => m_turnRate;
+    
     [Header("Chase")]
     [SerializeField]
     private float m_chaseSpeed = 5.0f;
@@ -33,6 +37,7 @@ public class BigMoth : MonoBehaviour
     private float m_updateDestinationInterval = 0.5f;
     public float UpdateDestinationInterval => m_updateDestinationInterval;
     
+    [SerializeField]
     private float m_attackRange = 2.0f;
     public float AttackRange => m_attackRange;
 
@@ -62,6 +67,10 @@ public class BigMoth : MonoBehaviour
     private float m_visionAngle = 90f;
     public float VisionAngle => m_visionAngle;
     
+    [SerializeField]
+    private float m_darknessVisionReduction = 0.2f;
+    public float DarknessVisionReduction => m_darknessVisionReduction;
+    
     private StateMachine m_stateMachine;
     public StateMachine StateMachine => m_stateMachine;
 
@@ -70,6 +79,8 @@ public class BigMoth : MonoBehaviour
     
     private void Awake()
     {
+        m_navmeshAgent.updateRotation = false;
+        
         Dictionary<Enum, State> states = new Dictionary<Enum, State>()
         {
             {EBigMothState.State_Patrol, new State_Patrol(this)},
@@ -93,20 +104,35 @@ public class BigMoth : MonoBehaviour
         Vector3 directionToPlayer = GameContext.Player.CenterPosition - m_headTransform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
         
-        if (distanceToPlayer > m_visionRange)
+        float effectiveVisionRange = m_visionRange;
+        if (GameContext.Player.IsInDarkness())
+            effectiveVisionRange *= m_darknessVisionReduction;
+        
+        if (distanceToPlayer > effectiveVisionRange)
             return false;
 
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         if (angle > m_visionAngle * 0.5f)
             return false;
-
-        RaycastHit hit;
-        if (Physics.Raycast(m_headTransform.position, directionToPlayer.normalized, out hit, m_visionRange))
+        
+        if (Physics.Raycast(m_headTransform.position, directionToPlayer.normalized, out RaycastHit hit, effectiveVisionRange))
         {
             if (hit.transform.CompareTag("Player"))
                 return true;
         }
 
         return false;
+    }
+    
+    public void RotateTowards(Vector3 targetPoint)
+    {
+        Vector3 dirToTargetXZ = targetPoint - transform.position;
+        dirToTargetXZ.y = 0;
+        
+        if (dirToTargetXZ.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(dirToTargetXZ);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, m_turnRate * Time.deltaTime);
+        }
     }
 }

@@ -3,17 +3,7 @@ guid: f3e6d61da95372a4ea401c2607208cba
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Ceiling
-    second: {fileID: 2100000, guid: b8150eba7cb4a3047a821314e43f28a6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Wallpaper
-    second: {fileID: 2100000, guid: 8e6029e6cc2763b42b794cd5e1d7e27d, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

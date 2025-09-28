@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BigMoth
   m_navmeshAgent: {fileID: 7790188314698570652}
   m_headTransform: {fileID: 1521590507247950448}
+  m_turnRate: 5
   m_chaseSpeed: 5
   m_losePlayerTime: 3
   m_updateDestinationInterval: 0.5
@@ -61,6 +62,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_visionRange: 15
   m_visionAngle: 90
+  m_darknessVisionReduction: 0.2
 --- !u!195 &7790188314698570652
 NavMeshAgent:
   m_ObjectHideFlags: 0
