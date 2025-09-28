@@ -5,6 +5,9 @@ using UnityEngine.Serialization;
 
 public class AngelLamp : LightSource
 {
+    [SerializeField]
+    private AudioClip m_angelSoundClip;
+    
     private CollisionTrigger[] m_triggers;
 
     [SerializeField]
@@ -72,6 +75,7 @@ public class AngelLamp : LightSource
                 m_pulledSmallMoth = moth;
                 m_pulledSmallMoth.OnAscendComplete += OnSmallMothAscendComplete;
                 moth.OnEnterAngelLight(this);
+                SoundManager.Instance.PlaySoundFX(m_angelSoundClip, transform, 1.0f, false, 10.0f);
             }
         }
     }

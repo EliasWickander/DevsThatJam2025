@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AngelLamp
   m_lightObject: {fileID: 2516557330268833668}
   m_startAsOn: 1
+  m_angelSoundClip: {fileID: 8300000, guid: 4e6b1c8176a17de42a12671ef3e84fb7, type: 3}
   m_smallMothLayerMask:
     serializedVersion: 2
     m_Bits: 128

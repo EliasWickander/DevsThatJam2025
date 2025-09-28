@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b50005faff8bc74380a969db1ebc703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAngelLamp
+  m_angelSoundClip: {fileID: 8300000, guid: 4e6b1c8176a17de42a12671ef3e84fb7, type: 3}
   m_onTurnOff:
     m_PersistentCalls:
       m_Calls:

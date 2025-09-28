@@ -6,6 +6,9 @@ using UnityEngine.Serialization;
 public class PlayerAngelLamp : MonoBehaviour
 {
     [SerializeField]
+    private AudioClip m_angelSoundClip;
+    
+    [SerializeField]
     private UnityEvent m_onTurnOff;
 
     [SerializeField]
@@ -28,6 +31,7 @@ public class PlayerAngelLamp : MonoBehaviour
         m_playerStartPos = GameContext.Player.transform.position;
         m_targetPos = transform.position - new Vector3(0, 3.5f, 0);
         m_ascendTimer = 0.0f;
+        SoundManager.Instance.PlaySoundFX(m_angelSoundClip, transform, 1.0f, false, 10.0f);
     }
 
     private void Update()
