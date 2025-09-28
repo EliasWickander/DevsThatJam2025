@@ -294,6 +294,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30550022}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &70297110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 70297112}
+  - component: {fileID: 70297111}
+  m_Layer: 0
+  m_Name: SoundFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &70297111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70297110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2804c7a0a27314e852915351d5909a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundFXManager
+  soundFXObject: {fileID: 0}
+--- !u!4 &70297112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70297110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &89485701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3dfc041c21ea048ad87944287fd42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  interactionRadius: 3
 --- !u!1 &1245287656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1307,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOn
+      value: 
+      objectReference: {fileID: 8300000, guid: 807163032ed1c38478a0c9afc9ae2262, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOff
+      value: 
+      objectReference: {fileID: 8300000, guid: 79cc73b0fce1c7b48888904977a960c5, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOnLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 807163032ed1c38478a0c9afc9ae2262, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOffLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 79cc73b0fce1c7b48888904977a960c5, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
       propertyPath: m_maxIntensity
       value: 3
       objectReference: {fileID: 0}
@@ -1336,3 +1396,4 @@ SceneRoots:
   - {fileID: 161443074}
   - {fileID: 8221726110893440302}
   - {fileID: 249911877}
+  - {fileID: 70297112}
