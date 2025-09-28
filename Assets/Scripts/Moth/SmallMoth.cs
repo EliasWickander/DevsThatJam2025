@@ -73,6 +73,8 @@ public class SmallMoth : MonoBehaviour
     private Light m_lightFromFlashlight;
     public Light LightFromFlashlight => m_lightFromFlashlight;
     
+    public event Action OnAscendComplete;
+    
     private void Awake()
     {
         m_animationEventListener = GetComponentInChildren<MothAnimationEventListener>();
@@ -110,18 +112,7 @@ public class SmallMoth : MonoBehaviour
         if(m_stateMachine == null)
             return;
         
-        if ((ESmallMothState)m_stateMachine.CurrentStateType == ESmallMothState.State_Ascending)
-        {
-            if (m_targetAngelLamp == null || !m_targetAngelLamp.IsOn)
-            {
-                m_targetAngelLamp = null;
-                m_stateMachine.SetState(ESmallMothState.State_Idle);
-            }
-        }
-        else
-        {
-            UpdateLightTarget();   
-        }
+        UpdateLightTarget();  
         
         m_stateMachine.Update();
     }
@@ -175,6 +166,13 @@ public class SmallMoth : MonoBehaviour
         m_targetAngelLamp = angelLamp;
         m_stateMachine.SetState(ESmallMothState.State_Ascending);
         m_animator.SetBool(m_isAscendingHash, true);
+    }
+
+    public void OnAscended()
+    {
+        OnAscendComplete?.Invoke();
+        GameManager.Instance.OnMothAscended();
+        Destroy(gameObject);
     }
     
     private void PlayFootstep()
