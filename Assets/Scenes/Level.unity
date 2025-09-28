@@ -723,6 +723,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOn
+      value: 
+      objectReference: {fileID: 8300000, guid: 807163032ed1c38478a0c9afc9ae2262, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOff
+      value: 
+      objectReference: {fileID: 8300000, guid: 79cc73b0fce1c7b48888904977a960c5, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOnLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 807163032ed1c38478a0c9afc9ae2262, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
+      propertyPath: m_turnOffLamp
+      value: 
+      objectReference: {fileID: 8300000, guid: 79cc73b0fce1c7b48888904977a960c5, type: 3}
+    - target: {fileID: 2209666425472503937, guid: fe9219dba6f1c9643b63f895535b74ea, type: 3}
       propertyPath: m_maxIntensity
       value: 3
       objectReference: {fileID: 0}
