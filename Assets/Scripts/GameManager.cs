@@ -55,7 +55,6 @@ public class GameManager : Singleton<GameManager>
     public void OnMothAscended()
     {
         m_mothsAscended++;
-        OnAllMothsAscended();
         if(m_mothsAscended >= m_spawnManager.SmallMothAmount)
             OnAllMothsAscended();
     }
