@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 06b463439d0506841a215b18246216ea, type: 3}
   - {fileID: 8300000, guid: 0cff74d839b0b00418d469134a7ad131, type: 3}
   - {fileID: 8300000, guid: b8e12056741420d449bb24d02f5b667f, type: 3}
-  m_stepInterval: 0.5
+  m_maxHearDistance: 20
   m_navmeshAgent: {fileID: 7790188314698570652}
   m_headTransform: {fileID: 1521590507247950448}
   m_turnRate: 5

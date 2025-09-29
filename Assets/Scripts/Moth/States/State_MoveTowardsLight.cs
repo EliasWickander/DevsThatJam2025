@@ -22,14 +22,14 @@ public class State_MoveTowardsLight : State
         Light targetLightToMoveTo = m_mothOwner.CanSeeFlashlight ? m_mothOwner.LightFromFlashlight : m_mothOwner.CurrentFascinationLightTarget;
         Light targetLightToLookAt = m_mothOwner.CanSeeFlashlight ? m_mothOwner.LightFromFlashlight : m_mothOwner.CurrentFascinationLightTarget;
 
-        Vector3 headRotationTarget = targetLightToLookAt.transform.position;
-        Vector3 bodyRotationTarget = targetLightToLookAt.transform.position;
-        
         if (targetLightToLookAt == null && targetLightToMoveTo == null)
         {
             m_mothOwner.StateMachine.SetState(ESmallMothState.State_Idle);
             return;
         }
+        
+        Vector3 headRotationTarget = targetLightToLookAt.transform.position;
+        Vector3 bodyRotationTarget = targetLightToLookAt.transform.position;
             
         Vector3 dirToLightXZ = targetLightToMoveTo.transform.position - m_mothOwner.transform.position;
         dirToLightXZ.y = 0; 
