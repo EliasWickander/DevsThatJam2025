@@ -238,7 +238,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 45a0b888a6c4ea445bdd506957dc2ecc, type: 3}
   - {fileID: 8300000, guid: 5b1c9c45b49fcb342b91d4835c0eacf8, type: 3}
   - {fileID: 8300000, guid: f2eae09bf36180944ae863e64debebab, type: 3}
-  m_maxHearDistance: 5
+  m_voiceClip: {fileID: 8300000, guid: 2387e1e6469870c4fb8f2b6e5fe53ca1, type: 3}
+  m_minVoiceInterval: 3
+  m_maxVoiceInterval: 15
+  m_maxHearDistance: 10
   m_animator: {fileID: 7190581118861055799}
   m_headTransform: {fileID: 2588848727961921481}
   m_timeToAscend: 5

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CustomToolkit.AdvancedTypes;
 using CustomToolkit.Attributes;
 using UnityEngine;
@@ -7,6 +8,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField]
+    private AudioSource m_ambienceAudioSource;
+    
+    [Header("Ambience Clips")]
+    [SerializeField]
+    private AudioClip m_defaultAmbienceClip;
+    
+    [SerializeField]
+    private AudioClip m_chaseAmbienceClip;
+
+    [SerializeField]
+    private float m_chaseVolume = 1.0f;
+    
     [Scene]
     [SerializeField]
     private string m_levelScene;
@@ -36,6 +50,11 @@ public class GameManager : Singleton<GameManager>
         base.OnSingletonAwake();
 
         m_spawnManager = GetComponent<SpawnManager>();
+    }
+
+    private void Start()
+    {
+        SetAmbienceSound(m_defaultAmbienceClip);
     }
 
     protected override void OnSingletonDestroy()
@@ -73,5 +92,25 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("You win");
         Time.timeScale = 0;
         OnWon?.Invoke();
+    }
+
+    public void OnChaseStart()
+    {
+        SetAmbienceSound(m_chaseAmbienceClip, m_chaseVolume);
+    }
+    
+    public void OnChaseEnd()
+    {
+        SetAmbienceSound(m_defaultAmbienceClip);
+    }
+
+    private void SetAmbienceSound(AudioClip clip, float volume = 1.0f)
+    {
+        m_ambienceAudioSource.clip = clip;
+        
+        if(m_ambienceAudioSource.clip != null)
+            m_ambienceAudioSource.Play();
+        else
+            m_ambienceAudioSource.Stop();
     }
 }

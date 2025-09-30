@@ -25,6 +25,8 @@ public class State_Chase : State
         m_losePlayerTimer = m_mothOwner.LosePlayerTime;
         m_destinationUpdateTimer = 0f;
         
+        GameManager.Instance.OnChaseStart();
+        m_mothOwner.PlayRoar();
         UpdateDestination();
     }
 
@@ -65,6 +67,7 @@ public class State_Chase : State
         m_navAgent.ResetPath();
         m_losePlayerTimer = 0f;
         m_destinationUpdateTimer = 0f;
+        GameManager.Instance.OnChaseEnd();
     }
     
     private void UpdateDestination()

@@ -26,6 +26,12 @@ public class BigMoth : MonoBehaviour
     private float m_maxHearDistance = 5.0f;
     
     [SerializeField]
+    private AudioClip m_roarClip;
+    
+    [SerializeField]
+    private float m_roarVolume = 1.0f;
+    
+    [SerializeField]
     private NavMeshAgent m_navmeshAgent;
     public NavMeshAgent NavmeshAgent => m_navmeshAgent;
     
@@ -108,6 +114,11 @@ public class BigMoth : MonoBehaviour
         m_stateMachine = new StateMachine(states);
     }
 
+    private void Start()
+    {
+        GameContext.BigMoth = this;
+    }
+
     private void OnEnable()
     {
         if (m_animationEventListener != null)
@@ -186,5 +197,13 @@ public class BigMoth : MonoBehaviour
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
         SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f, true, m_maxHearDistance);
+    }
+
+    public void PlayRoar()
+    {
+        if (m_roarClip == null)
+            return;
+        
+        SoundManager.Instance.PlaySoundFX(m_roarClip, transform, m_roarVolume, true, m_maxHearDistance);
     }
 }

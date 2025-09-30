@@ -6,6 +6,8 @@ public abstract class LightSource : MonoBehaviour
     [SerializeField]
     protected Light m_lightObject;
 
+    public Light LightObject => m_lightObject;
+    
     [SerializeField]
     private bool m_startAsOn = false;
     

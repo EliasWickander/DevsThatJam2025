@@ -20,6 +20,15 @@ public class SmallMoth : MonoBehaviour
     private AudioClip[] m_footstepClips; 
     
     [SerializeField]
+    private AudioClip m_voiceClip;
+    
+    [SerializeField]
+    private float m_minVoiceInterval = 1.0f;
+    
+    [SerializeField]
+    private float m_maxVoiceInterval = 3.0f;
+    
+    [SerializeField]
     private float m_maxHearDistance = 5.0f;
     
     [SerializeField]
@@ -74,6 +83,9 @@ public class SmallMoth : MonoBehaviour
     public Light LightFromFlashlight => m_lightFromFlashlight;
     
     public event Action OnAscendComplete;
+
+    private float m_voiceSoundTimer = 0.0f;
+    private float m_nextVoiceInterval = 0.0f;
     
     private void Awake()
     {
@@ -107,6 +119,11 @@ public class SmallMoth : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SetNextVoiceInterval();
+    }
+
     private void Update()
     {
         if(m_stateMachine == null)
@@ -115,6 +132,8 @@ public class SmallMoth : MonoBehaviour
         UpdateLightTarget();  
         
         m_stateMachine.Update();
+        
+        HandleVoice();
     }
 
     private void LateUpdate()
@@ -161,6 +180,19 @@ public class SmallMoth : MonoBehaviour
             m_lightFromFlashlight = null;
     }
 
+    private void HandleVoice()
+    {
+        m_voiceSoundTimer += Time.deltaTime;
+        
+        if (m_voiceSoundTimer >= m_nextVoiceInterval)
+        {
+            if (m_voiceClip != null)
+                SoundManager.Instance.PlaySoundFX(m_voiceClip, transform, 1.0f, true, m_maxHearDistance);
+            
+            SetNextVoiceInterval();
+        }
+    }
+    
     public void OnEnterAngelLight(AngelLamp angelLamp)
     {
         m_targetAngelLamp = angelLamp;
@@ -182,5 +214,11 @@ public class SmallMoth : MonoBehaviour
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
         SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f, true, m_maxHearDistance);
+    }
+
+    private void SetNextVoiceInterval()
+    {
+        m_nextVoiceInterval = Random.Range(m_minVoiceInterval, m_maxVoiceInterval);
+        m_voiceSoundTimer = 0.0f;
     }
 }

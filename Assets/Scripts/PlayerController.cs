@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -14,6 +15,27 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] 
     private float m_stepInterval = 0.5f;
+    
+    [SerializeField]
+    private List<AudioClip> m_jumpScareClips;
+    
+    [SerializeField]
+    private float m_jumpScareVolume = 1.0f;
+    
+    [SerializeField]
+    private float m_howLongUntilNextJumpScare = 15.0f;
+
+    [SerializeField]
+    private List<AudioClip> m_monsterAmbienceClip;
+    
+    [SerializeField]
+    private float m_ambienceRange = 15.0f;
+    
+    [SerializeField]
+    private float m_ambienceRegularityMin = 30.0f;
+    
+    [SerializeField]
+    private float m_ambienceRegularityMax = 60.0f;
     
     [SerializeField]
     private PlayerInput m_playerInput;
@@ -43,6 +65,16 @@ public class PlayerController : MonoBehaviour
     public Vector3 CurrentVelocity => m_currentVelocity;
 
     private float m_stepTimer = 0.0f;
+    
+    [SerializeField]
+    private LayerMask m_obstructionLayerMask;
+    
+    private float m_timeSinceLastJumpscared = Mathf.Infinity;
+    
+    private bool m_wasMonsterSeenLastFrame = false;
+    
+    private float m_timeSinceLastAmbience = Mathf.Infinity;
+    private float m_nextAmbienceTime = 0.0f;
     
 
     private void OnValidate()
@@ -74,6 +106,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         GameContext.Player = this;
+        m_timeSinceLastJumpscared = Mathf.Infinity;
     }
 
     private void Update()
@@ -81,15 +114,40 @@ public class PlayerController : MonoBehaviour
         if (m_characterController.enabled)
         {
             HandleMovement();
-            HandleFootsteps();   
+            HandleFootsteps();
+            HandleJumpscares();
+            HandleMonsterAmbience();
         }
+    }
+
+    private void HandleMonsterAmbience()
+    {
+        if(GameContext.BigMoth == null)
+            return;
+        
+        if(Vector3.Distance(GameContext.BigMoth.transform.position, transform.position) < m_ambienceRange)
+        {
+            if(m_timeSinceLastAmbience >= m_nextAmbienceTime)
+            {
+                for(int i = 0; i < m_monsterAmbienceClip.Count; i++)
+                {
+                    AudioClip clip = m_monsterAmbienceClip[i];
+                    SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f, false);
+                }
+                
+                m_timeSinceLastAmbience = 0.0f;
+                m_nextAmbienceTime = Random.Range(m_ambienceRegularityMin, m_ambienceRegularityMax);
+            }
+        }
+        
+        m_timeSinceLastAmbience += Time.deltaTime;
     }
 
     private void LateUpdate()
     {
         HandleTurning();
     }
-
+    
     private void HandleMovement()
     {
         Vector3 moveDirection = new Vector3(m_currentMoveInput.x, 0, m_currentMoveInput.y);
@@ -118,6 +176,27 @@ public class PlayerController : MonoBehaviour
 
         Vector3 targetHandPosition = cameraTransform.position + cameraTransform.TransformVector(m_handPositionOffset);
         m_handTransform.position = Vector3.Lerp(m_handTransform.position, targetHandPosition, Time.deltaTime * 15f);
+    }
+    
+    private void HandleJumpscares()
+    {
+        bool isMonsterSeen = IsMonsterSeenByFlashlight();
+        if (isMonsterSeen && !m_wasMonsterSeenLastFrame)
+        {
+            if (m_timeSinceLastJumpscared >= m_howLongUntilNextJumpScare)
+            {
+                if (m_jumpScareClips.Count > 0)
+                {
+                    AudioClip clip = m_jumpScareClips[Random.Range(0, m_jumpScareClips.Count)];
+                    SoundManager.Instance.PlaySoundFX(clip, transform, m_jumpScareVolume, false);
+                }
+                    
+                m_timeSinceLastJumpscared = 0.0f;
+            }
+        }
+        
+        m_timeSinceLastJumpscared += Time.deltaTime;
+        m_wasMonsterSeenLastFrame = isMonsterSeen;
     }
     
     public void OnMoveInput(Vector2 input)
@@ -164,5 +243,35 @@ public class PlayerController : MonoBehaviour
 
         AudioClip clip = m_footstepClips[Random.Range(0, m_footstepClips.Length)];
         SoundManager.Instance.PlaySoundFX(clip, transform, 1.0f);
+    }
+    
+    bool IsMonsterSeenByFlashlight()
+    {
+        BigMoth bigMoth = GameContext.BigMoth;
+        if(bigMoth == null)
+            return false;
+        
+        Light spotlight = m_flashLight.LightObject;
+        
+        Vector3 spotlightPos = spotlight.transform.position;
+        Vector3 spotlightForward = spotlight.transform.forward;
+        float maxDistance = spotlight.range;
+        float halfSpotAngle = spotlight.spotAngle * 0.5f;
+        
+        Vector3 targetPos = bigMoth.transform.position;
+        Vector3 directionToTarget = (targetPos - spotlightPos).normalized;
+        float distanceToTarget = Vector3.Distance(spotlightPos, targetPos);
+        
+        if (distanceToTarget > maxDistance)
+            return false;
+        
+        float angleToTarget = Vector3.Angle(spotlightForward, directionToTarget);
+        if (angleToTarget > halfSpotAngle)
+            return false;
+        
+        if (Physics.Raycast(spotlightPos, directionToTarget, out RaycastHit hit, distanceToTarget, m_obstructionLayerMask))
+            return false;
+
+        return true;
     }
 }
